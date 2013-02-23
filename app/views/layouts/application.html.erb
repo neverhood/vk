@@ -6,9 +6,21 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
 
-<%= yield %>
+<body id='<%= controller_name.dasherize %>' data-action='<%= action_name.dasherize %>'>
 
+<div id='wrapper'>
+  <%= render 'header'        %>
+  <%= render 'notifications' %>
+
+  <div class='container' id='content'>
+  <%= yield %>
+
+  <div id='push'></div>
+  </div>
+</div>
+
+<%= render 'footer' %>
 </body>
+
 </html>

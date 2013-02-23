@@ -1,0 +1,8 @@
+ru:
+  flash:
+    sessions:
+      callback:
+        notice: 'Вход выполнен'
+        alert:  'Ошибка, пожалуйста, попробуйте еще раз'
+      destroy:
+        notice: 'Выход выполнен'

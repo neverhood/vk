@@ -14,3 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //
+//= require bootstrap-alert
+//= require bootstrap-modal
+//= require bootstrap-transition
+//
