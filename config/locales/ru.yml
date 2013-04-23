@@ -1,4 +1,25 @@
 ru:
+  application:
+    header:
+      brand: 'VK Poster'
+      sign_in: 'Войти через ВК'
+      sign_out: 'Выйти'
+      root: 'Главная'
+      profile: 'Профиль'
+    footer:
+      message: 'Футер'
+
+  common:
+    please_wait: 'Пожалуйста, подождите ..'
+    are_you_sure?: 'Вы уверены?'
+    destroy: 'Удалить'
+    cancel: 'Отменить'
+    back: 'Назад'
+    heads_up!: 'Внимание!'
+    warning!: 'Осторожно!'
+    x: '×'
+    submit: 'Сохранить'
+
   activerecord:
     models:
     attributes:
@@ -12,3 +33,12 @@ ru:
   sessions:
     new:
       header: 'Вход'
+
+  users:
+    show:
+      header: 'Профиль'
+      wall_post_disabled: 'Нет возможности постинга'
+      wall_post_enabled: 'Есть возможность постинга'
+      wall_post_disabled_explanation: 'Чтобы включить возможность постинга, Вам нужно нажать на кнопку ниже,
+после чего скопировать содержимое адресной строки и вставить в поле Token'
+      enable_wall_post: 'Включить возможность постинга'

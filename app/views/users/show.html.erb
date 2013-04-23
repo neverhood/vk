@@ -1,0 +1,25 @@
+<%= page_header %>
+
+<%- if current_user.wall_post_enabled? %>
+  <div class='alert alert-success'>
+    <%= icon_label 'icon-ok', t('.wall_post_enabled') %>
+  </div>
+<%- else %>
+  <div class='alert alert-danger'>
+    <%= icon_label 'icon-exclamation-sign', t('.wall_post_disabled') %>
+  </div>
+
+  <div class='well'>
+    <p><%= t('.wall_post_disabled_explanation').html_safe %></p>
+
+    <%= link_to t('.enable_wall_post'), vk_token_url, target: '_blank', class: 'btn btn-info' %>
+
+    <hr />
+
+    <%= simple_form_for :session, url: session_path, method: 'put' do |form| %>
+      <%= form.input :token %>
+
+      <%= form.button :submit, t('common.submit'), data: { disable_with: t('common.please_wait') } %>
+    <% end %>
+  </div>
+<%- end %>

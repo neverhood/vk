@@ -14,7 +14,62 @@
 //= require jquery_ujs
 //= require turbolinks
 //
+//= require api
+//
 //= require bootstrap-alert
 //= require bootstrap-modal
+//= require bootstrap-modal-extended
+//= require bootstrap-modalmanager
 //= require bootstrap-transition
 //
+//= require cookie
+//
+//= require welcome
+//
+
+$.ajaxSettings.dataType = 'json';
+
+function nearBottomOfPage() {
+    return scrollDistanceFromBottom() < 400;
+}
+
+function scrollDistanceFromBottom() {
+    return pageHeight() - (window.pageYOffset + window.innerHeight);
+}
+
+function pageHeight() {
+    return Math.max(document.body.scrollHeight, document.body.offsetHeight);
+}
+
+$(window).on('page:fetch', function(event) {
+    $.api.loading = true;
+
+    $.api.utils.toggleSpinner();
+});
+
+$(window).on('page:restore', function() {
+    // History
+    if ( $('div#loader').is(':visible') ) {
+        $.api.utils.toggleSpinner();
+
+        $.api.loading = false;
+    }
+});
+
+$(window).on('page:fetch', function() {
+});
+
+$(window).bind('page:load load', function(event) {
+    $.api.controller     = document.body.id;
+    $.api.action         = document.body.attributes['data-action'].value;
+
+    $.api.header.init()
+
+    var controllerPath = $.api[ $.camelCase($.api.controller).replace('/', '-') ];
+    if ( typeof controllerPath === 'object' ) controllerPath.init();
+
+    $.api.loading = false
+});
+
+
+

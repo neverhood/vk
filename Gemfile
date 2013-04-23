@@ -1,20 +1,18 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', github: 'rails/rails'
+gem 'rails', '4.0.0.beta1'
 
-gem 'journey', github: 'rails/journey'
-gem 'activerecord-deprecated_finders', github: 'rails/activerecord-deprecated_finders'
-
-gem 'thin'
+gem 'pg'
 gem 'sqlite3'
+
+gem 'vkontakte_api'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sprockets-rails', '~> 2.0.0.rc1'
-  gem 'sass-rails', github: 'rails/sass-rails'
-  gem 'coffee-rails', github: 'rails/coffee-rails'
+  gem 'sass-rails',   '~> 4.0.0.beta1'
+  gem 'coffee-rails', '~> 4.0.0.beta1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', platforms: :ruby
@@ -22,17 +20,12 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 
   gem 'bootstrap-sass'
-  gem 'font-awesome-sass-rails'
+  gem 'font-awesome-more-rails', git: 'git@github.com:neverhood/font-awesome-more-rails.git'
   gem 'jquery-fileupload-rails'
 end
 
-gem 'jquery-rails'
-
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
-gem 'jquery-turbolinks'
-
 group :development, :test do
+  gem 'pry-rails'
   gem 'meta_request'
   gem 'rspec-rails'
   gem 'capybara'
@@ -40,34 +33,34 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'rb-inotify', '~> 0.8.8'
   gem 'factory_girl_rails'
+  gem 'letter_opener'
 end
 
 group :test do
   gem 'shoulda-matchers'
-  gem 'database_cleaner'
+  gem 'database_cleaner', git: 'git://github.com/bmabey/database_cleaner.git'
 end
 
-# DB
-gem 'pg'
-
-gem 'responders'
-gem 'pry-rails'
 gem 'russian'
-gem 'kaminari'
-gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git', branch: 'rails_4'
+gem 'unicode_utils'
 
-# VK
-gem 'vkontakte_api'
+gem 'jquery-rails'
+
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+
+gem 'simple_form', git: 'git://github.com/plataformatec/simple_form.git'
+gem 'kaminari'
+
+gem 'rails_config'
 
 # Image Processing
-gem 'carrierwave'
-gem 'mini_magick'
+
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+#gem 'jbuilder', '~> 1.0.1'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -75,3 +68,5 @@ gem 'mini_magick'
 # Deploy with Capistrano
 # gem 'capistrano', group: :development
 
+# To use debugger
+# gem 'debugger'

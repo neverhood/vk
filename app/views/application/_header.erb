@@ -1,18 +1,21 @@
-<div class="navbar navbar-inverse" id='header'>
+<div class="navbar" id='header'>
 
   <div class="navbar-inner">
     <%= link_to t('.brand'), root_path, class: 'brand', data: { 'no-turbolink' => true } %>
 
     <ul class="nav">
-      <li class='active'> <%= link_to 'Hi world', nil %> </li>
-      <li> <%= link_to 'Bye world', nil %> </li>
+      <li class='<%= "active" if current_page?(root_path) %>'> <%= link_to t('.root'), root_path %> </li>
+
+      <%- if user_signed_in? %>
+        <li> <%= link_to t('.profile'), user_path %> </li>
+      <% end %>
     </ul>
 
     <ul class='nav pull-right'>
       <%- if user_signed_in? %>
-        <li> <%= link_to image_label('icon-signout', t('.sign_out')), session_path, method: 'delete' %> </li>
+        <li> <%= link_to icon_label('icon-signout', t('.sign_out')), session_path, method: 'delete' %> </li>
       <% else %>
-        <li> <%= link_to image_label('icon-signin', t('.sign_in')), @vk_url %> </li>
+        <li> <%= link_to icon_label('icon-signin', t('.sign_in')), @vk_url %> </li>
       <% end %>
     </ul>
   </div>

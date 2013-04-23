@@ -9,9 +9,11 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require font-awesome
  */
 
 @import 'bootstrap/variables';
+@import 'theme-variables'; // Theme Variables
 // Modify this for custom colors, font-sizes, etc
 @import 'bootstrap/mixins';
 // CSS Reset
@@ -58,13 +60,13 @@
 @import 'bootstrap/utilities';
 
 // Application styles
-@import 'font-awesome';
-
 @import 'common/variables';
 @import 'common/mixins';
 @import 'common/classes';
 @import 'common/placeholders';
 
+// Vendor
+@import 'bootstrap-modal';
 // Application Views
 @import 'views/welcome';
 @import 'views/sessions';
