@@ -3,4 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body#groups {
+    div#groups {
+    }
+
+    div.group {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 }

@@ -4,5 +4,17 @@
 #
 
 $.api.groups =
-    init:
-        console.log 'groups'
+    init: ->
+        $('a#update-groups').bind('ajax:beforeSend', ->
+            $(this).addClass 'disabled'
+        ).bind('ajax:complete', (event, xhr, status) ->
+            $(this).removeClass 'disabled'
+            response = $.parseJSON(xhr.responseText)
+
+            $('div#groups').html response.groups
+        )
+
+        $('div#groups').on 'ajax:beforeSend', 'a.destroy-group', ->
+            $(this).parents('div.group').remove()
+
+

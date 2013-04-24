@@ -24,7 +24,11 @@
 //
 //= require cookie
 //
+//= require header
 //= require welcome
+//
+//= require authenticated/users
+//= require authenticated/groups
 //
 
 $.ajaxSettings.dataType = 'json';
@@ -63,12 +67,16 @@ $(window).bind('page:load load', function(event) {
     $.api.controller     = document.body.id;
     $.api.action         = document.body.attributes['data-action'].value;
 
-    $.api.header.init()
+    $.api.header.init();
 
     var controllerPath = $.api[ $.camelCase($.api.controller).replace('/', '-') ];
     if ( typeof controllerPath === 'object' ) controllerPath.init();
 
-    $.api.loading = false
+    $.api.loading = false;
+
+    $(document.body).on('click', 'a.disabled', function(event) {
+        event.stopPropagation();
+    });
 });
 
 

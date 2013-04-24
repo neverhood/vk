@@ -2,4 +2,16 @@
   <%= page_header %>
 <% end %>
 
-hi
+<%= link_to t('.update'), groups_path, method: 'put', remote: true, class: 'btn btn-success', id: 'update-groups' %>
+
+<hr />
+
+<div id='groups'>
+  <%- if @groups.any? %>
+    <%= render @groups %>
+    <hr />
+  <% else %>
+    <h3><%= t '.no_groups' %></h3>
+  <% end %>
+
+</div>

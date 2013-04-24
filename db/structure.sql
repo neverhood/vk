@@ -50,8 +50,10 @@ CREATE TABLE groups (
     id integer NOT NULL,
     active boolean DEFAULT true,
     user_id integer NOT NULL,
+    vk_id integer NOT NULL,
     name character varying(255),
     screen_name character varying(255),
+    group_type character varying(255),
     photo_urls hstore,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
@@ -155,6 +157,13 @@ ALTER TABLE ONLY users
 --
 
 CREATE INDEX index_groups_on_user_id ON groups USING btree (user_id);
+
+
+--
+-- Name: index_groups_on_vk_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_groups_on_vk_id ON groups USING btree (vk_id);
 
 
 --

@@ -1,0 +1,3 @@
+$.api.header =
+    init: ->
+

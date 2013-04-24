@@ -1,0 +1,13 @@
+<div class='group row'>
+  <div class='span2'>
+    <%= image_tag group.photo_urls['photo_medium'] %>
+  </div>
+
+  <div class='span3'>
+    <strong><%= group.name %></strong>
+  </div>
+
+  <div class='span5'>
+    <%= link_to icon_label('icon-trash', t('.destroy')), group_path(group), method: 'delete', remote: true, class: 'btn btn-info destroy-group' %>
+  </div>
+</div>

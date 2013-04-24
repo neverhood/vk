@@ -70,6 +70,8 @@
 // Application Views
 @import 'views/welcome';
 @import 'views/sessions';
+@import 'views/authenticated/users';
+@import 'views/authenticated/groups';
 
 /* HEADER */
 div#header {
