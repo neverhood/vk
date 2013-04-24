@@ -9,18 +9,19 @@
 
 <body id='<%= controller_name.dasherize %>' data-action='<%= action_name.dasherize %>'>
 
-<div id='wrapper'>
-  <%= render 'header'        %>
-  <%= render 'notifications' %>
+  <div id='wrapper'>
+    <%= render 'header'        %>
+    <%= render 'notifications' %>
 
-  <div class='container' id='content'>
-  <%= yield %>
+    <div class='container' id='content'>
+      <%= yield(:page_header) if content_for?(:page_header) %>
+      <%= content_for?(:content) ? yield(:content) : yield %>
 
-  <div id='push'></div>
+      <div id='push'></div>
+    </div>
   </div>
-</div>
 
-<%= render 'footer' %>
+  <%= render 'footer' %>
 </body>
 
 </html>

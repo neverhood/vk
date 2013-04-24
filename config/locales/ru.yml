@@ -34,11 +34,17 @@ ru:
     new:
       header: 'Вход'
 
-  users:
-    show:
-      header: 'Профиль'
-      wall_post_disabled: 'Нет возможности постинга'
-      wall_post_enabled: 'Есть возможность постинга'
-      wall_post_disabled_explanation: 'Чтобы включить возможность постинга, Вам нужно нажать на кнопку ниже,
-после чего скопировать содержимое адресной строки и вставить в поле Token'
-      enable_wall_post: 'Включить возможность постинга'
+  authenticated:
+    sidebar:
+      groups: 'Группы'
+    users:
+      show:
+        header: 'Профиль'
+        wall_post_disabled: 'Нет возможности постинга'
+        wall_post_enabled: 'Есть возможность постинга'
+        wall_post_disabled_explanation: 'Чтобы включить возможность постинга, Вам нужно нажать на кнопку ниже,
+  после чего скопировать содержимое адресной строки и вставить в поле Token'
+        enable_wall_post: 'Включить возможность постинга'
+    groups:
+      index:
+        header: 'Группы'

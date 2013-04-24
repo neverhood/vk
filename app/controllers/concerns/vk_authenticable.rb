@@ -9,6 +9,10 @@ module VkAuthenticable
     before_filter :prepare_vk_url, if: -> { not user_signed_in? }
   end
 
+  def authenticate_user!
+    redirect_to root_path unless user_signed_in?
+  end
+
   def sign_in user
     session[:user_id] = user.id
   end

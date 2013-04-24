@@ -1,4 +1,6 @@
-<%= page_header %>
+<% content_for :page_header do %>
+  <%= page_header %>
+<% end %>
 
 <%- if current_user.wall_post_enabled? %>
   <div class='alert alert-success'>
