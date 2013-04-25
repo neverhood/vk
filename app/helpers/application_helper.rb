@@ -3,7 +3,11 @@ module ApplicationHelper
     "<div class='page-header'> <h3> #{ text } </h3> </div>".html_safe
   end
 
-  def icon_label(classes, text)
+  def icon_label(classes, text = '')
     "<i class='#{ classes }'></i> #{ text }".html_safe
+  end
+
+  def dom_id(*args)
+    super.dasherize
   end
 end

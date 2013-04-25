@@ -29,6 +29,7 @@
 //
 //= require authenticated/users
 //= require authenticated/groups
+//= require authenticated/posts
 //
 
 $.ajaxSettings.dataType = 'json';

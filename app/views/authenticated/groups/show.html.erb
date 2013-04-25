@@ -1,0 +1,27 @@
+<% content_for :page_header do %>
+  <%= page_header @group.name %>
+<% end %>
+
+<div id='group'>
+  <%= link_to nil, id: 'new-post-form-toggler', class: 'btn btn-info' do %>
+    <i class='icon-angle-up'></i> <%= t '.new_post' %>
+  <% end %>
+
+  <%= render 'authenticated/posts/form' %>
+
+  <hr />
+
+  <div id='posts' class='row'>
+    <%= render @posts %>
+  </div>
+
+  <div id='edit-post-form-container'>
+    <%= simple_form_for :edit_post, url: post_path(id: 0), method: 'put', remote: true, html: { id: 'edit-post' } do |form| %>
+      <%= form.input :body, as: :text, input_html: { class: 'span6', rows: 6 } %>
+
+      <%= form.button :submit, t('common.submit'), data: { disable_with: t('common.please_wait') } %>
+      <%= link_to t('common.cancel'), nil, class: 'btn btn-danger', id: 'cancel-post-edit' %>
+    <% end %>
+  </div>
+</div>
+

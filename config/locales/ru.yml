@@ -23,6 +23,8 @@ ru:
   activerecord:
     models:
     attributes:
+      post:
+        body: 'Содержание'
     errors:
 
   # Views
@@ -50,5 +52,8 @@ ru:
         header: 'Группы'
         no_groups: 'Не найдено ни одной группы. Пожалуйста, обновите список групп'
         update: 'Обновить список групп'
+      show:
+        new_post: 'Новый пост (Показать\скрыть форму)'
       group:
         destroy: 'Убрать из списка'
+        posts: 'Посты'

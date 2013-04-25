@@ -1,0 +1,33 @@
+// Place all the styles related to the authenticated/posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body#groups {
+
+    /* Show */
+    div#group {
+        div#posts {
+            margin: 15px 0;
+        }
+
+        div#posts div.post {
+            min-height: 50px;
+            padding: 10px;
+
+            div.post-options {
+                float: right;
+            }
+
+            div.post-options a.post-option {
+                @extend %non-decorated;
+            }
+        }
+
+        div#new-post-form-container, div#edit-post-form-container {
+            margin: 25px 0 15px 0;
+
+            display: none;
+        }
+    }
+
+}

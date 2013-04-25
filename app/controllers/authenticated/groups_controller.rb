@@ -6,6 +6,8 @@ class Authenticated::GroupsController < Authenticated::BaseController
   end
 
   def show
+    @posts = @group.posts.page(params[:page])
+    @post  = @group.posts.new
   end
 
   def destroy

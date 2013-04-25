@@ -68,10 +68,12 @@
 // Vendor
 @import 'bootstrap-modal';
 // Application Views
-@import 'views/welcome';
-@import 'views/sessions';
-@import 'views/authenticated/users';
-@import 'views/authenticated/groups';
+@import 'authenticated/common';
+@import 'welcome';
+@import 'sessions';
+@import 'authenticated/users';
+@import 'authenticated/groups';
+@import 'authenticated/posts';
 
 /* HEADER */
 div#header {

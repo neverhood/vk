@@ -17,10 +17,13 @@ $.api = {
 
         appendErrors: function(form, model, errors) {
             $.each(errors, function(key, errors) {
-                input = form.find('#' + model + '_' + key);
+                var attribute = model + '_' + key;
+
+                var input = form.find('#' + attribute);
+                form.find('div.control-group' + ( '.' + attribute )).addClass('error');
 
                 $.each(errors, function(index, error) {
-                    input.after("<small class='error'>" + error + "</small>");
+                    input.after("<span class='help-inline'>" + error + "</span>");
                 });
             });
         },
@@ -32,13 +35,14 @@ $.api = {
         },
 
         prependEntry: function(container, form, entry) {
-            form.trigger('reset').parent().slideToggle('fast');
+            form.trigger('reset').parent().slideUp('fast');
 
             container.prepend(entry);
         },
 
         clearErrors: function(form) {
-            form.find('small.error').remove();
+            form.find('span.help-inline').remove();
+            form.find('.error').removeClass('error');
         },
 
         appendNotification: function(type, message) {

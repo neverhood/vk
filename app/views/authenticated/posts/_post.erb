@@ -1,0 +1,13 @@
+<div class='post span6 alert alert-info' id='<%= dom_id(post) %>'>
+  <div class='content'>
+    <div class='body'><%= simple_format post.body %></div>
+
+    <div class='post-options'>
+      <%= link_to icon_label('icon-pencil'), nil, class: 'edit post-option' %>
+      <%= link_to icon_label('icon-trash'), post_path(post), remote: true, method: 'delete', class: 'destroy post-option', data: { confirm: t('common.are_you_sure?') } %>
+    </div>
+  </div>
+
+  <div class='edit-form-placeholder'>
+  </div>
+</div>

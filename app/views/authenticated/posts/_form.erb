@@ -1,0 +1,10 @@
+<div id='new-post-form-container'>
+  <%= simple_form_for @post, remote: true, html: { id: 'new-post' } do |form| %>
+    <%= form.input :body, input_html: { class: 'span6', rows: 6 } %>
+    <%= form.input :group_id, as: :hidden %>
+
+    <div class='form-actions'>
+      <%= form.button :submit, t('common.submit'), class: 'btn-success', data: { disable_with: t('common.please_wait') } %>
+    </div>
+  <% end %>
+</div

@@ -5,6 +5,8 @@
 
 $.api.groups =
     init: ->
+        $.api.posts.init() if $.api.action == 'show'
+
         $('a#update-groups').bind('ajax:beforeSend', ->
             $(this).addClass 'disabled'
         ).bind('ajax:complete', (event, xhr, status) ->
