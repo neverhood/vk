@@ -5,6 +5,7 @@ class CreatePosts < ActiveRecord::Migration
       t.text :body
 
       t.boolean :posted, default: false
+      t.boolean :from_group, default: true
 
       t.timestamps
     end

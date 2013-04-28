@@ -70,6 +70,7 @@ $.api.posts =
             editPostFormContainer.slideDown 'fast'
             editPostForm.attr('action', editPostForm.attr('action').replace(/\d+/, post.attr('id').replace('post-', '')))
             editPostForm.find('textarea#edit_post_body').val post.find('div.body').text()
+            editPostForm.find('input#edit_post_from_group').prop('checked', post.data('from-group'))
 
             images = post.find('div.post-photo')
             previewsContainer = $('div#edit-post-media-previews')

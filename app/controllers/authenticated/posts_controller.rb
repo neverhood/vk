@@ -52,11 +52,11 @@ class Authenticated::PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:body, :group_id, photo_ids: [])
+    params.require(:post).permit(:body, :group_id, :from_group, photo_ids: [])
   end
 
   def edit_post_params # needed because we have both 'new' and 'edit' forms on the same page
-    params.require(:edit_post).permit(:body, photo_ids: [])
+    params.require(:edit_post).permit(:body, :from_group, photo_ids: [])
   end
 
   def validate_photo_ids!

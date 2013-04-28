@@ -150,6 +150,8 @@ CREATE TABLE posts (
     id integer NOT NULL,
     group_id integer NOT NULL,
     body text,
+    posted boolean DEFAULT false,
+    from_group boolean DEFAULT true,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );

@@ -26,6 +26,7 @@ ru:
     attributes:
       post:
         body: 'Содержание'
+        from_group: 'Публиковать от имени группы'
     errors:
 
   # Views

@@ -1,4 +1,4 @@
-<div class='post span6 alert alert-info' id='<%= dom_id(post) %>'>
+<div class='post span6 alert alert-info' id='<%= dom_id(post) %>' data-from-group='<%= post.from_group? %>'>
   <div class='content'>
     <div class='body'><%= simple_format post.body %></div>
 

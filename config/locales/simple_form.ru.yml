@@ -13,6 +13,7 @@ ru:
     labels:
       edit_post:
         body: 'Содержание'
+        from_group: 'Публиковать от имени группы'
     # Labels and hints examples
     # labels:
     #   defaults:
