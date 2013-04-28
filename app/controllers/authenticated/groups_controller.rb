@@ -6,8 +6,9 @@ class Authenticated::GroupsController < Authenticated::BaseController
   end
 
   def show
-    @posts = @group.posts.page(params[:page])
-    @post  = @group.posts.new
+    @posts  = @group.posts.page(params[:page])
+    @photos = current_user.photos.all
+    @post   = @group.posts.new
   end
 
   def destroy

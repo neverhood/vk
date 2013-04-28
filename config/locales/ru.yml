@@ -14,6 +14,7 @@ ru:
     are_you_sure?: 'Вы уверены?'
     destroy: 'Удалить'
     cancel: 'Отменить'
+    close: 'Закрыть'
     back: 'Назад'
     heads_up!: 'Внимание!'
     warning!: 'Осторожно!'
@@ -54,6 +55,19 @@ ru:
         update: 'Обновить список групп'
       show:
         new_post: 'Новый пост (Показать\скрыть форму)'
+        photos: 'Загрузка фотографий'
+        photos_body: 'Загрузи бля'
+        alert: 'Выбранный файл не является картинкой, загрузка отменена'
+        upload_photos: 'Загрузить фотографии'
+        browse: 'Загрузить фотографии'
+        attachments_toggler: 'Прикрепить'
+        uploads:
+          photos: 'Фотография'
       group:
         destroy: 'Убрать из списка'
         posts: 'Посты'
+    posts:
+      form:
+        attachments_toggler: 'Прикрепить'
+        uploads:
+          photos: 'Фотография'

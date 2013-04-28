@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery-fileupload/basic
 //
 //= require api
 //
@@ -30,6 +31,7 @@
 //= require authenticated/users
 //= require authenticated/groups
 //= require authenticated/posts
+//= require authenticated/photos
 //
 
 $.ajaxSettings.dataType = 'json';

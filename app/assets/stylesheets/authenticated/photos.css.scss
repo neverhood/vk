@@ -1,0 +1,58 @@
+// Place all the styles related to the authenticated/photos controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body#groups {
+    div#new-photo-button {
+        cursor: pointer;
+        float: left;
+        overflow: hidden;
+        position: relative;
+    }
+
+    div#new-photo-button input[type="button"] {
+        @extend .btn;
+        @extend .btn-info;
+    }
+
+    div#new-photo-button input[type="file"] {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        cursor: pointer;
+        opacity: 0;
+        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+    }
+
+    div.photo-upload-progress-bar {
+        clear: both;
+    }
+
+    div.photo {
+        float: left;
+
+        margin: 0 5px;
+        cursor: pointer;
+
+        height: 150px;
+    }
+
+    div.post-photo {
+        float: left;
+        margin: 0 5px;
+    }
+
+    div.post-media-preview {
+        height: 150px;
+    }
+
+    div#edit-post-media-previews {
+        div.post-media-preview {
+            height: auto;
+
+            span.remove-preview {
+                right: 0;
+            }
+        }
+    }
+}

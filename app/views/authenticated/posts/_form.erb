@@ -1,10 +1,28 @@
-<div id='new-post-form-container'>
+<div id='new-post-form-container' class='span6'>
   <%= simple_form_for @post, remote: true, html: { id: 'new-post' } do |form| %>
     <%= form.input :body, input_html: { class: 'span6', rows: 6 } %>
     <%= form.input :group_id, as: :hidden %>
-
     <div class='form-actions'>
-      <%= form.button :submit, t('common.submit'), class: 'btn-success', data: { disable_with: t('common.please_wait') } %>
+      <%= form.button :submit, t('common.submit'), class: 'btn-success pull-left', data: { disable_with: t('common.please_wait') } %>
+      <%= form.input :photo_ids, as: :hidden, input_html: { value: @post.photo_ids.join(',') } %>
+
+      <div class='btn-group pull-right attachments-dropdown-container' id='attachments-dropdown-container'>
+        <%= link_to nil, class: 'btn btn-info dropdown-toggle attachments-dropdown-toggler', id: 'attachments-dropdown-toggler' do %>
+          <%= t '.attachments_toggler' %> <span class='caret'></span>
+        <% end %>
+
+        <ul class='dropdown-menu attachments-dropdown' id='attachments-dropdown'>
+          <li> <%= link_to t('.uploads.photos'), nil, id: 'attachment-photo' %> </li>
+        </ul>
+      </div>
+
+      <hr class='clear-separator invisible'>
+
+      <div class='post-media-previews' id='post-media-previews'>
+      </div>
     </div>
   <% end %>
-</div
+
+  <hr>
+</div>
+

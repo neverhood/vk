@@ -6,6 +6,12 @@
       <%= link_to icon_label('icon-pencil'), nil, class: 'edit post-option' %>
       <%= link_to icon_label('icon-trash'), post_path(post), remote: true, method: 'delete', class: 'destroy post-option', data: { confirm: t('common.are_you_sure?') } %>
     </div>
+
+    <div class='post-photos'>
+      <% post.photos.each do |photo| %>
+        <div class='post-photo' id='post-photo-<%= photo.id %>'><%= image_tag photo.urls['src_small'] %></div>
+      <% end %>
+    </div>
   </div>
 
   <div class='edit-form-placeholder'>

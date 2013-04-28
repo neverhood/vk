@@ -1,0 +1,2 @@
+module Authenticated::PhotosHelper
+end

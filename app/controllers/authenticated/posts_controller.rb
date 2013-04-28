@@ -1,6 +1,7 @@
 class Authenticated::PostsController < ApplicationController
   before_filter :find_post!, only: [ :show, :update, :destroy ]
   before_filter :find_group!, only: [ :create ]
+  before_filter :validate_photo_ids!, only: [ :create, :update ]
 
   def show
   end
@@ -51,10 +52,22 @@ class Authenticated::PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:body, :group_id)
+    params.require(:post).permit(:body, :group_id, photo_ids: [])
   end
 
   def edit_post_params # needed because we have both 'new' and 'edit' forms on the same page
-    params.require(:edit_post).permit(:body)
+    params.require(:edit_post).permit(:body, photo_ids: [])
+  end
+
+  def validate_photo_ids!
+    if params[:post].present?
+      params[:post][:photo_ids] = _validated_photo_ids(params[:post][:photo_ids])
+    elsif params[:edit_post].present?
+      params[:edit_post][:photo_ids] = _validated_photo_ids(params[:edit_post][:photo_ids])
+    end
+  end
+
+  def _validated_photo_ids id_list
+    current_user.photos.select('photos.id').where(id: id_list.split(',').map(&:to_i).uniq).pluck(:id)
   end
 end

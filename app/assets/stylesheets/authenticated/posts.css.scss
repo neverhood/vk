@@ -28,6 +28,29 @@ body#groups {
 
             display: none;
         }
+
+        a.attachments-dropdown-toggler {
+            @include border-radius(0);
+        }
+
+        ul.attachments-dropdown {
+            margin: 0;
+            padding: 0;
+            @include border-radius(0);
+
+            li {
+            }
+        }
+
+        div.post-media-preview {
+            float: left;
+        }
+
+        div#edit-post-media-previews {
+            span.remove {
+                right: none;
+            }
+        }
     }
 
 }

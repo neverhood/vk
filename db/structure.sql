@@ -80,6 +80,69 @@ ALTER SEQUENCE groups_id_seq OWNED BY groups.id;
 
 
 --
+-- Name: photos; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE photos (
+    id integer NOT NULL,
+    user_id integer,
+    urls hstore,
+    info hstore,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: photos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE photos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: photos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE photos_id_seq OWNED BY photos.id;
+
+
+--
+-- Name: photos_posts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE photos_posts (
+    id integer NOT NULL,
+    photo_id integer,
+    post_id integer
+);
+
+
+--
+-- Name: photos_posts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE photos_posts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: photos_posts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE photos_posts_id_seq OWNED BY photos_posts.id;
+
+
+--
 -- Name: posts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -165,6 +228,20 @@ ALTER TABLE ONLY groups ALTER COLUMN id SET DEFAULT nextval('groups_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY photos ALTER COLUMN id SET DEFAULT nextval('photos_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY photos_posts ALTER COLUMN id SET DEFAULT nextval('photos_posts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regclass);
 
 
@@ -181,6 +258,22 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 ALTER TABLE ONLY groups
     ADD CONSTRAINT groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: photos_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY photos
+    ADD CONSTRAINT photos_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: photos_posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY photos_posts
+    ADD CONSTRAINT photos_posts_pkey PRIMARY KEY (id);
 
 
 --
@@ -211,6 +304,27 @@ CREATE INDEX index_groups_on_user_id ON groups USING btree (user_id);
 --
 
 CREATE UNIQUE INDEX index_groups_on_vk_id ON groups USING btree (vk_id);
+
+
+--
+-- Name: index_photos_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_photos_on_user_id ON photos USING btree (user_id);
+
+
+--
+-- Name: index_photos_posts_on_photo_id_and_post_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_photos_posts_on_photo_id_and_post_id ON photos_posts USING btree (photo_id, post_id);
+
+
+--
+-- Name: index_photos_posts_on_post_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_photos_posts_on_post_id ON photos_posts USING btree (post_id);
 
 
 --
@@ -247,3 +361,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130423172624');
 INSERT INTO schema_migrations (version) VALUES ('20130424135808');
 
 INSERT INTO schema_migrations (version) VALUES ('20130424160131');
+
+INSERT INTO schema_migrations (version) VALUES ('20130425112708');
+
+INSERT INTO schema_migrations (version) VALUES ('20130425113926');
