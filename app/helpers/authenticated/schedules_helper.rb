@@ -1,0 +1,2 @@
+module Authenticated::SchedulesHelper
+end

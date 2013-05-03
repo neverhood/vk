@@ -3,78 +3,22 @@
 <% end %>
 
 <div id='group'>
-  <%= link_to nil, id: 'new-post-form-toggler', class: 'btn btn-info' do %>
+  <%= link_to nil, id: 'post-form-toggler', class: 'btn btn-info' do %>
     <i class='icon-angle-up'></i> <%= t '.new_post' %>
   <% end %>
 
   <hr />
-  <%= render 'authenticated/posts/form' %>
+
+  <div id='initial-post-form-container'>
+    <%= render 'authenticated/posts/form' %>
+  </div>
 
   <div id='posts' class='row'>
     <%= render @posts %>
   </div>
 
-  <div id='edit-post-form-container'>
-    <%= simple_form_for :edit_post, url: post_path(id: 0), method: 'put', remote: true, html: { id: 'edit-post' } do |form| %>
-      <%= form.input :body, as: :text, input_html: { class: 'span6', rows: 6 } %>
-      <%= form.input :from_group, as: :boolean, label: false, inline_label: true %>
-      <%= form.input :photo_ids, as: :hidden, input_html: { value: nil } %>
-
-      <%= form.button :submit, t('common.submit'), data: { disable_with: t('common.please_wait') } %>
-      <%= link_to t('common.cancel'), nil, class: 'btn btn-danger', id: 'cancel-post-edit' %>
-
-      <div class='btn-group pull-right attachments-dropdown-container' id='edit-attachments-dropdown-container'>
-        <%= link_to nil, class: 'btn btn-info dropdown-toggle attachments-dropdown-toggler', id: 'edit-attachments-dropdown-toggler' do %>
-          <%= t '.attachments_toggler' %> <span class='caret'></span>
-        <% end %>
-
-        <ul class='dropdown-menu attachments-dropdown' id='edit-attachments-dropdown'>
-          <li> <%= link_to t('.uploads.photos'), nil, id: 'edit-attachment-photo' %> </li>
-        </ul>
-      </div>
-
-      <hr class='clear-separator invisible'>
-
-      <div id='edit-post-media-previews'>
-      </div>
-    <% end %>
-  </div>
-
-  <div class='modal container hide fade' id='photos-modal' tabindex='-1'>
-    <div class='modal-header'>
-      <button type='button' class='close' id='close-photos-modal'><%= t 'common.x' %></button>
-      <h3> <%= t '.photos' %> </h3>
-    </div>
-
-    <div class="modal-body">
-      <div id='photo-uploading-container'>
-        <%= simple_form_for Photo.new, html: { id: 'upload-photos', multipart: true, data: { alert: t('.alert') } } do |form| %>
-          <div id='new-photo-button'>
-            <input type="button" value="<%= t '.browse' %>">
-
-            <%= form.input :image, :as => :file, :label => false, :input_html => { multiple: true, name: 'photo[image]' } %>
-          </div>
-        <% end %>
-
-        <div id='file-upload-progress' class='hidden photo-upload-progress-bar'>
-          <div class='filename'></div>
-
-          <div class='progress progress-striped active'> <div class="bar"></div> </div>
-        </div>
-      </div>
-
-      <hr class='clear-separator'>
-
-      <div id='photos'>
-        <%= render @photos %>
-      </div>
-    </div>
-
-    <hr class='clear-separator'>
-    <div class="modal-footer">
-      <%= link_to t('common.close'), nil, id: 'close-photos-modal', class: 'btn' %>
-    </div>
-  </div>
+  <%= render 'authenticated/photos/form_modal' %>
+  <%= render 'authenticated/schedules/form_modal' %>
 
   <div id='post-media-preview-template' class='hidden post-media-preview'>
     <span class='close remove-preview'> <%= t 'common.x' %> </span>

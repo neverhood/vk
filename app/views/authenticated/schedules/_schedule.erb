@@ -1,0 +1,9 @@
+<div class='schedule' id='<%= dom_id(schedule) %>'>
+  <span class='label label-info'> <%= l schedule.post_at, format: :short %> </span> -
+
+  <%- if schedule.finished? %>
+    <strong class='label label-success'> <%= t '.finished' %> </strong>
+  <% else %>
+    <strong class='label'> <%= t '.unfinished' %> </strong>
+  <% end %>
+</div>

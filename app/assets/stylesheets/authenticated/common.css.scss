@@ -2,4 +2,9 @@ ul#authenticated-sidebar {
     a {
         color: $infoText;
     }
+
+    li.active a {
+        background: $infoText;
+        color: white;
+    }
 }

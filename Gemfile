@@ -22,6 +22,7 @@ group :assets do
   gem 'bootstrap-sass'
   gem 'font-awesome-more-rails', git: 'git@github.com:neverhood/font-awesome-more-rails.git'
   gem 'jquery-fileupload-rails'
+  gem 'bootstrap-datepicker-rails'
 end
 
 group :development, :test do
@@ -53,6 +54,7 @@ gem 'simple_form', git: 'git://github.com/plataformatec/simple_form.git'
 gem 'kaminari'
 
 gem 'rails_config'
+gem 'validates_timeliness'
 
 # Image Processing
 

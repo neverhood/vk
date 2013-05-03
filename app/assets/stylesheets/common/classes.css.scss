@@ -1,3 +1,7 @@
 hr.clear-separator {
     clear: both;
 }
+
+.error {
+    color: $errorText;
+}

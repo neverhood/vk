@@ -150,8 +150,10 @@ CREATE TABLE posts (
     id integer NOT NULL,
     group_id integer NOT NULL,
     body text,
-    posted boolean DEFAULT false,
+    posted_times integer DEFAULT 0,
     from_group boolean DEFAULT true,
+    repost boolean,
+    vk_details hstore,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -174,6 +176,39 @@ CREATE SEQUENCE posts_id_seq
 --
 
 ALTER SEQUENCE posts_id_seq OWNED BY posts.id;
+
+
+--
+-- Name: schedules; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE schedules (
+    id integer NOT NULL,
+    post_id integer,
+    post_at timestamp without time zone,
+    finished boolean,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: schedules_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE schedules_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: schedules_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE schedules_id_seq OWNED BY schedules.id;
 
 
 --
@@ -251,6 +286,13 @@ ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY schedules ALTER COLUMN id SET DEFAULT nextval('schedules_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
@@ -284,6 +326,14 @@ ALTER TABLE ONLY photos_posts
 
 ALTER TABLE ONLY posts
     ADD CONSTRAINT posts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schedules_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY schedules
+    ADD CONSTRAINT schedules_pkey PRIMARY KEY (id);
 
 
 --
@@ -367,3 +417,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130424160131');
 INSERT INTO schema_migrations (version) VALUES ('20130425112708');
 
 INSERT INTO schema_migrations (version) VALUES ('20130425113926');
+
+INSERT INTO schema_migrations (version) VALUES ('20130503095826');

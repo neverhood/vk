@@ -1,0 +1,25 @@
+// Place all the styles related to the authenticated/schedules controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body#groups {
+    div#schedule-options {
+        margin-bottom: 20px;
+    }
+
+    a#new-schedule-form-toggler {
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+
+    div.schedule {
+        span {
+            width: 100px;
+
+            text-align: center;
+        }
+
+        strong {
+        }
+    }
+}

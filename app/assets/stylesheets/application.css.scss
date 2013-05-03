@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require font-awesome
+ *= require bootstrap-datepicker
  */
 
 @import 'bootstrap/variables';
@@ -75,6 +76,7 @@
 @import 'authenticated/groups';
 @import 'authenticated/posts';
 @import 'authenticated/photos';
+@import 'authenticated/schedules';
 
 /* HEADER */
 div#header {

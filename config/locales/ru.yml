@@ -27,7 +27,16 @@ ru:
       post:
         body: 'Содержание'
         from_group: 'Публиковать от имени группы'
+        vk_details: 'Ссылка на пост'
+      schedule:
+        post_at_date: 'Дата публикации'
+        post_at_time: 'Время публикации'
     errors:
+      models:
+        post:
+          attributes:
+            vk_details:
+              invalid: 'Введена неправильная ссылка на пост'
 
   # Views
   welcome:
@@ -56,19 +65,39 @@ ru:
         update: 'Обновить список групп'
       show:
         new_post: 'Новый пост (Показать\скрыть форму)'
-        photos: 'Загрузка фотографий'
         photos_body: 'Загрузи бля'
-        alert: 'Выбранный файл не является картинкой, загрузка отменена'
         upload_photos: 'Загрузить фотографии'
-        browse: 'Загрузить фотографии'
         attachments_toggler: 'Прикрепить'
         uploads:
           photos: 'Фотография'
       group:
         destroy: 'Убрать из списка'
         posts: 'Посты'
+
+    photos:
+      form_modal:
+        photos: 'Загрузка фотографий'
+        alert: 'Выбранный файл не является картинкой, загрузка отменена'
+        browse: 'Загрузить фотографии'
+
+    schedules:
+      form_modal:
+        new: 'Добавить публикацию(установить дату\время)'
+        schedules: 'Расписание'
+        regular: 'Установить дату и время публикации'
+        now: 'Опубликовать сейчас'
+        publish!: 'Опубликовать!'
+      schedule:
+        finished: 'Завершено!'
+        unfinished: 'Не завершено'
+
     posts:
       form:
         attachments_toggler: 'Прикрепить'
+        regular: 'Пост'
+        repost: 'Репост'
+        repost_placeholder: 'http://vk.com/id8822049?w=wall-52504667_65'
         uploads:
           photos: 'Фотография'
+      post:
+        repost_from: 'Репост из'

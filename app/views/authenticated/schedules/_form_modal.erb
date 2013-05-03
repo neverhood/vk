@@ -1,0 +1,47 @@
+<div class='modal container hide fade' id='schedules-modal' tabindex='-1'>
+  <div class='modal-header'>
+    <button type='button' class='close' id='close-schedules-modal'><%= t 'common.x' %></button>
+    <h3> <%= t '.schedules' %> </h3>
+  </div>
+
+  <div class="modal-body">
+    <%= link_to icon_label('icon-angle-up', t('.new')), nil, id: 'new-schedule-form-toggler', class: 'btn btn-info' %>
+
+    <div id='schedule-form-container'>
+      <div id='schedule-options'>
+        <%= link_to t('.regular'), nil, id: 'regular-schedule', class: 'btn disabled' %>
+        <%= link_to t('.now'), nil, id: 'now-schedule', class: 'btn' %>
+      </div>
+
+      <div id='regular-schedule'>
+        <%= simple_form_for :schedule, url: schedules_path, remote: true, html: { id: 'new-schedule' } do |form| %>
+          <%= form.input :post_id, as: 'hidden' %>
+          <%= form.input :post_at_date, as: 'string' %>
+          <%= form.input :post_at_time, as: 'time'   %>
+
+          <%= form.button :submit, t('common.submit'), data: { disable_with: t('common.please_wait') } %>
+        <% end %>
+      </div>
+
+      <div id='now-schedule' class='hidden'>
+        <%= simple_form_for :schedule, url: schedules_path, remote: true, html: { id: 'new-now-schedule' } do |form| %>
+          <%= form.input :post_id, as: 'hidden' %>
+          <%= form.input :post_now, as: 'hidden', input_html: { value: true } %>
+
+          <%= form.button :submit, t('.publish!'), class: 'btn-danger', data: { disable_with: t('common.please_wait') } %>
+        <% end %>
+      </div>
+    </div>
+
+    <hr class='clear-separator'>
+
+    <div id='schedules'>
+    </div>
+  </div>
+
+  <hr class='clear-separator'>
+  <div class="modal-footer">
+    <%= link_to t('common.close'), nil, id: 'close-schedules-modal', class: 'btn' %>
+  </div>
+</div>
+

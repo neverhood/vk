@@ -1,19 +1,29 @@
 <div class='post span6 alert alert-info' id='<%= dom_id(post) %>' data-from-group='<%= post.from_group? %>'>
-  <div class='content'>
-    <div class='body'><%= simple_format post.body %></div>
+  <%- if post.repost? %>
+    <%= repost_content(post) %>
 
     <div class='post-options'>
-      <%= link_to icon_label('icon-pencil'), nil, class: 'edit post-option' %>
       <%= link_to icon_label('icon-trash'), post_path(post), remote: true, method: 'delete', class: 'destroy post-option', data: { confirm: t('common.are_you_sure?') } %>
+      <%= link_to icon_label('icon-time'), nil, class: 'add-timer post-option' %>
+    </div>
+  <% else %>
+    <div class='content'>
+      <div class='body'><%= simple_format post.body %></div>
+
+      <div class='post-options'>
+        <%= link_to icon_label('icon-pencil'), nil, class: 'edit post-option' %>
+        <%= link_to icon_label('icon-trash'), post_path(post), remote: true, method: 'delete', class: 'destroy post-option', data: { confirm: t('common.are_you_sure?') } %>
+        <%= link_to icon_label('icon-time'), nil, class: 'add-timer post-option' %>
+      </div>
+
+      <div class='post-photos'>
+        <% post.photos.each do |photo| %>
+          <div class='post-photo' id='post-photo-<%= photo.id %>'><%= image_tag photo.urls['src_small'] %></div>
+        <% end %>
+      </div>
     </div>
 
-    <div class='post-photos'>
-      <% post.photos.each do |photo| %>
-        <div class='post-photo' id='post-photo-<%= photo.id %>'><%= image_tag photo.urls['src_small'] %></div>
-      <% end %>
+    <div class='form-placeholder'>
     </div>
-  </div>
-
-  <div class='edit-form-placeholder'>
-  </div>
+  <% end %>
 </div>

@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def callback
     if session[:state].present? and session[:state] != params[:state]
-      redirect_to root_path, alert: I18n.t('flash.sessions.callback.alert') and return
+      redirect_to(root_path, alert: I18n.t('flash.sessions.callback.alert')) and return
     end
 
     @vk = VkontakteApi.authorize(code: params[:code])

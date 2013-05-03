@@ -1,137 +1,153 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-#
 
 $.api.posts =
     init: ->
-        # Elements
         container = $('div#posts')
+        entrySelector = 'div.post'
 
-        newPostFormToggler = $('a#new-post-form-toggler')
-        newPostFormContainer = $('div#new-post-form-container')
-        newPostForm = $('form#new-post')
-        editPostFormToggler = 'div.post-options a.edit.post-option'
-        editPostFormContainer = $('div#edit-post-form-container')
-        editPostForm = $('form#edit-post')
+        toggler = $('a#post-form-toggler')
+        form  = $('form#post-form')
+        repostForm = $('form#repost-form')
+        forms = $('form#post-form, form#repost-form')
+        formContainer = $('div#post-form-container')
+        resetForm = ->
+            form.trigger 'reset'
+            form.find('input#post_photo_ids').val ''
+            container.find('div.content').show()
+            attachments.mediaPreviewsContainer.find('div.post-media-preview').remove()
+            attachments.photosContainer.find('div.photo').show()
+        updateUrl = (id) -> "/posts/#{id}"
+        createUrl = '/posts/'
 
-        resetNewPostForm = ->
-            newPostForm.trigger 'reset'
-            newPostForm.find('span.remove-preview').trigger 'click'
-        resetEditPostForm = ->
-            editPostFormContainer.hide()
-            editPostForm.trigger 'reset'
-            editPostForm.find('span.remove-preview').trigger 'click'
-            container.find('div.post div.content').show()
+        attachments =
+            mediaPreviewTemplate: $('div#post-media-preview-template')
+            mediaPreviewsContainer: $('div#post-media-previews')
+            appendPreview: (img, id, container) ->
+                preview  = attachments.mediaPreviewTemplate.clone().removeAttr('id').removeClass('hidden').data('id', id).append(img)
+                photoIds = if form.find('input#post_photo_ids').val().length > 0 then form.find('input#post_photo_ids').val().split(',') else []
+                photoIds.push id
 
-        newPostFormToggler.bind 'click', (event) ->
+                form.find('input#post_photo_ids').val photoIds.join(',')
+                attachments.mediaPreviewsContainer.append(preview)
+            removePreview: ->
+                preview  = $(this).parents('div.post-media-preview')
+                photoIds = $.grep( form.find('input#post_photo_ids').val().split(','), (value) -> value != preview.data('id') )
+
+                $("div#photo-#{preview.data('id')}").show()
+                console.log photoIds
+                form.find('input#post_photo_ids').val photoIds.join(',')
+                preview.remove()
+
+            photosContainer: $('div#photos')
+
+        # Functions
+        toggleForm = (event) ->
             event.preventDefault()
-            event.stopPropagation()
+            $(this).find('i').toggleClass('icon-angle-up icon-angle-down')
+            $('div#initial-post-form-container').append formContainer
+            form.find('a#cancel-post-edit').addClass 'hidden'
+            resetForm()
 
-            $(this).find('i').toggleClass 'icon-angle-up icon-angle-down'
-            newPostFormContainer.slideToggle 'fast'
-            resetEditPostForm()
+            form.attr('method', 'post').attr('action', createUrl)
+            formContainer.slideToggle 'fast'
 
-        newPostForm.bind('ajax:beforeSend', ->
+        removeEntry = (event) ->
+            event.preventDefault()
+
+            $('div#initial-post-form-container').append(formContainer.hide())
+            $(this).parents(entrySelector).remove()
+
+        $('a#post-regular, a#post-repost').bind('click', (event) ->
+            event.preventDefault()
+
+            $('a#post-regular, a#post-repost').toggleClass('disabled')
+            formContainer.find('div#post-regular, div#post-repost').toggleClass('hidden')
+        )
+
+        # Form toggling(slideUp/slideDown)
+        toggler.bind 'click', toggleForm
+        container.on 'ajax:beforeSend', 'a.post-option.destroy', removeEntry
+
+        $('a#cancel-post-edit').bind 'click', (event) ->
+            event.preventDefault()
+            post = $(this).parents('div.post')
+
+            formContainer.slideUp('fast', ->
+                post.find('div.content').show()
+                resetForm()
+            )
+
+        form.bind('ajax:beforeSend', ->
             $.api.utils.clearErrors $(this)
         ).bind('ajax:complete', (event,xhr,status) ->
             response = $.parseJSON(xhr.responseText)
+            mode = if $('div#initial-post-form-container').find('form#post-form').length > 0 then 'new' else 'edit'
 
             if status == 'success'
-                $.api.utils.prependEntry container, $(this), response.entry
-                $(this).find('span.remove-preview').trigger 'click'
+                if mode == 'new'
+                    container.prepend response.entry
+                    $(this).trigger('reset')
+                    formContainer.slideUp 'fast'
+                else
+                    postId = form.attr('action').replace(/\D+/, '')
+                    $('div#initial-post-form-container').append formContainer
+                    container.find("div#post-#{postId}").replaceWith response.entry
+                    formContainer.slideToggle 'fast'
+
+                resetForm()
             else
                 $.api.utils.appendErrors $(this), 'post', response.errors
         )
 
-        editPostForm.bind('ajax:beforeSend', ->
+        repostForm.bind('ajax:beforeSend', ->
             $.api.utils.clearErrors $(this)
-        ).bind('ajax:complete', (event,xhr,status) ->
+        ).bind('ajax:complete', (event, xhr, status) ->
+            $this = $(this)
             response = $.parseJSON(xhr.responseText)
 
             if status == 'success'
-                editPostFormContainer.hide()
-                $('div#group').append editPostFormContainer
+                container.prepend response.entry
+                $this.trigger('reset')
 
-                $("div#post-#{response.id}").replaceWith response.entry
+                formContainer.slideUp 'fast'
             else
-                $.api.utils.appendErrors $(this), 'edit_post', response.errors
+                $.api.utils.appendErrors $(this), 'post', response.errors
         )
 
-        container.on 'click', editPostFormToggler, (event) ->
-            event.stopPropagation()
-            event.preventDefault()
 
-            container.find('div.post div.content').show()
+        # Attachments
+        $('a#attachments-dropdown-toggler').bind('click', (event) -> event.preventDefault())
+        $('div#attachments-dropdown-container').bind('mouseenter mouseleave', -> $('ul#attachments-dropdown').slideToggle 'fast')
+
+
+        attachments.photosContainer.on 'click', 'div.photo', ->
+            $this   = $(this).hide()
+            attachments.appendPreview $this.find('img').clone(), this.id.replace('photo-', '')
+
+        $('div#post-media-previews').on 'click', 'span.remove-preview', attachments.removePreview
+
+        container.on 'click', 'a.post-option.edit', (event) ->
+            event.preventDefault()
             post = $(this).parents('div.post')
 
+            resetForm()
             post.find('div.content').hide()
-            post.find('div.edit-form-placeholder').append(editPostFormContainer)
-            editPostFormContainer.slideDown 'fast'
-            editPostForm.attr('action', editPostForm.attr('action').replace(/\d+/, post.attr('id').replace('post-', '')))
-            editPostForm.find('textarea#edit_post_body').val post.find('div.body').text()
-            editPostForm.find('input#edit_post_from_group').prop('checked', post.data('from-group'))
+            post.find('div.form-placeholder').append(formContainer)
+            formContainer.slideDown 'fast', ->
+                form.attr('action', updateUrl(post.attr('id').replace('post-', ''))).attr('method', 'put')
+                form.find('textarea#post_body').val post.find('div.body').text()
+                form.find('input#post_from_group').prop('checked', post.data('from-group'))
+                form.find('a#cancel-post-edit').removeClass 'hidden'
 
-            images = post.find('div.post-photo')
-            previewsContainer = $('div#edit-post-media-previews')
-            previewsContainer.find('div.post-media-preview').remove()
-            photoIds = []
+                postPhotos = post.find('div.post-photo')
+                postPhotoIds = []
+                $.each postPhotos, (index, photo) ->
+                    photoId  = this.id.replace('post-photo-', '')
+                    postPhotoIds.push photoId
+                    $("div#photo-#{photoId}").hide()
+                    attachments.appendPreview $(photo).find('img').clone(), photoId
 
-            $.each images, (index, image) ->
-                photoId  = this.id.replace('post-photo-', '')
-                photoIds.push photoId
-                template = $('div#post-media-preview-template').clone().removeAttr('id').removeClass('hidden').data('photo-id', photoId)
-                previewsContainer.append( template.append $(this).find('img').clone() )
-
-            $('input#edit_post_photo_ids').val photoIds.join(',')
-
-            newPostFormContainer.hide()
-            resetNewPostForm()
-
-        container.on 'ajax:beforeSend', 'a.post-option.destroy', (event) ->
-            event.preventDefault()
-
-            container.append editPostFormContainer
-            $(this).parents('div.post').remove()
-
-        $('a#cancel-post-edit').bind 'click', (event) ->
-            event.preventDefault()
-
-            editPostFormContainer.slideUp('fast')
-            editPostForm.trigger 'reset'
-
-            $(this).parents('div.post').find('div.content').show()
-
-        $('a#attachments-dropdown-toggler').bind('click', (event) ->
-            event.preventDefault()
-        )
-
-        $('div#attachments-dropdown-container, div#edit-attachments-dropdown-container').bind('mouseenter mouseleave', ->
-            if this.id == 'attachments-dropdown-container'
-                $('ul#attachments-dropdown').slideToggle 'fast'
-            else
-                $('ul#edit-attachments-dropdown').slideToggle 'fast'
-        )
-
-        $('a#attachment-photo, a#edit-attachment-photo').bind('click', (event) ->
-            event.preventDefault()
-            $('div#photos div.photo').show()
-            mode = if this.id == 'edit-attachment-photo' then 'edit' else 'new'
-
-            if mode == 'edit'
-                post   = $(this).parents('div.post')
-                attachedImages = post.find('div.post-photo')
-                $.each attachedImages, (index, image) ->
-                    photoId = this.id.replace('post-photo-', '')
-                    console.log photoId
-                    $("div#photos div#photo-#{photoId}").hide()
-
-            $('div#photos-modal').modal('show').data('mode', mode)
-        )
-
-        $('button#close-photos-modal, a#close-photos-modal').bind 'click', (event) ->
-            event.preventDefault()
-
-            $('div#photos-modal').modal 'hide'
-
+                    $('input#post_photo_ids').val postPhotoIds.join(',')
 

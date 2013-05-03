@@ -11,9 +11,9 @@ ru:
     error_notification:
       default_message: "Please review the problems below:"
     labels:
-      edit_post:
-        body: 'Содержание'
-        from_group: 'Публиковать от имени группы'
+      schedule:
+        post_at_date: 'Дата публикации'
+        post_at_time: 'Время публикации'
     # Labels and hints examples
     # labels:
     #   defaults:

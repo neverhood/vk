@@ -1,10 +1,7 @@
-class Authenticated::PostsController < ApplicationController
-  before_filter :find_post!, only: [ :show, :update, :destroy ]
+class Authenticated::PostsController < Authenticated::BaseController
+  before_filter :find_post!, only: [ :update, :destroy ]
   before_filter :find_group!, only: [ :create ]
-  before_filter :validate_photo_ids!, only: [ :create, :update ]
-
-  def show
-  end
+  before_filter :validate_photo_ids!, only: [ :create, :update ], unless: -> { repost? }
 
   def destroy
     @post.destroy
@@ -17,7 +14,7 @@ class Authenticated::PostsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @post.update edit_post_params
+      if @post.update post_params
         format.html { redirect_to group_path(@post.group), notice: I18n.t('flash.authenticated.posts.update.notice') }
         format.json { render json: { entry: render_to_string(partial: 'post', locals: { post: @post }), id: @post.id }, status: 202 }
       else
@@ -28,7 +25,15 @@ class Authenticated::PostsController < ApplicationController
   end
 
   def create
-    @post = @group.posts.create(post_params)
+    if repost?
+      if valid_repost?
+        @post = @group.posts.create(repost_params)
+      else
+        @post = Post.new.tap { |post| post.errors.add(:vk_details, I18n.t('activerecord.errors.models.post.attributes.vk_details.invalid')) }
+      end
+    else
+      @post = @group.posts.create(post_params)
+    end
 
     respond_to do |format|
       if @post.persisted?
@@ -55,11 +60,26 @@ class Authenticated::PostsController < ApplicationController
     params.require(:post).permit(:body, :group_id, :from_group, photo_ids: [])
   end
 
-  def edit_post_params # needed because we have both 'new' and 'edit' forms on the same page
-    params.require(:edit_post).permit(:body, :from_group, photo_ids: [])
+  def repost_params
+    params.require(:post).permit(:vk_details).tap do |attributes|
+      wall_id, post_id = attributes[:vk_details].scan(/\d+_\d+/).last.split('_')
+
+      attributes[:vk_details] = { url: attributes[:vk_details], wall_id: wall_id, post_id: post_id }
+      attributes[:repost]             = true
+    end
+  end
+
+  def repost?
+    params.require(:post)[:repost] == 'true'
+  end
+
+  def valid_repost?
+    params[:post].try(:[], :vk_details) =~ /\d+_\d+/
   end
 
   def validate_photo_ids!
+    return if params[:post].try(:[], :photo_ids).nil?
+
     if params[:post].present?
       params[:post][:photo_ids] = _validated_photo_ids(params[:post][:photo_ids])
     elsif params[:edit_post].present?

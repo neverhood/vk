@@ -8,6 +8,8 @@ $.api.photos =
     container: -> $('div#photos'),
 
     init: ->
+        modal = $('div#photos-modal')
+
         _this = this
 
         $('form#upload-photos').fileupload
@@ -40,41 +42,14 @@ $.api.photos =
                     data.context.find('.bar').css
                         width: progress + '%'
 
-        $('div#photos').on 'click', 'div.photo', ->
-            mode = $('div#photos-modal').data('mode')
-            photoIdsInput = if mode == 'new' then $('input#post_photo_ids') else $('input#edit_post_photo_ids')
-            photoId       = this.id.replace('photo-', '')
-            template      = $('div#post-media-preview-template').clone().removeAttr('id').removeClass('hidden').data('photo-id', photoId)
+        $('button#close-photos-modal, a#close-photos-modal').bind 'click', (event) ->
+            event.preventDefault()
 
-            photoIds = if photoIdsInput.val().length > 0 then photoIdsInput.val().split(',') else []
-            photoIds.push photoId
-            photoIds = $.unique(photoIds).join(',')
+            modal.modal 'hide'
 
-            photoIdsInput.val photoIds
+        $('a#attachment-photo').bind 'click', (event) ->
+            event.preventDefault()
 
-            container = if mode == 'new' then $('div#post-media-previews') else $('div#edit-post-media-previews')
-            template.append  $(this).hide().find('img').clone()
-            container.append template
-
-        $('div#post-media-previews').on 'click', 'div.post-media-preview span.remove-preview', ->
-            $this = $(this).parents('div.post-media-preview')
-            $("div#photos div#photo-#{$this.data('photo-id')}").show()
-
-            photoIdsInput = $('input#post_photo_ids')
-            photoIds = photoIdsInput.val().split(',')
-            photoIds = $.grep(photoIds, (value) -> value != $this.data('photo-id'))
-            photoIdsInput.val photoIds.join(',')
-
-            $this.remove()
-
-        $('div#edit-post-media-previews').on 'click', 'div.post-media-preview span.remove-preview', ->
-            $this = $(this).parents('div.post-media-preview')
-            $("div#photos div#photo-#{$this.data('photo-id')}").show()
-
-            photoIdsInput = $('input#edit_post_photo_ids')
-            photoIds = photoIdsInput.val().split(',')
-            photoIds = $.grep(photoIds, (value) -> value != $this.data('photo-id'))
-            photoIdsInput.val photoIds.join(',')
-
-            $this.remove()
+            $('div#photos div.photo').show()
+            modal.modal 'show'
 

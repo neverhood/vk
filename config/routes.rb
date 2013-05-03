@@ -9,8 +9,11 @@ Vk::Application.routes.draw do
     resources :groups, only: [ :index, :show, :destroy ] do
       put :update, on: :collection
     end
-    resources :posts, only: [ :show, :update, :create, :destroy ]
+    resources :posts, only: [ :update, :create, :destroy ]
     resources :photos, only: [ :index, :create ]
+    resources :schedules, only: [ :create, :destroy, :update ] do
+      get :index, on: :member
+    end
 
     get 'profile' => 'users#show', as: 'user'
   end

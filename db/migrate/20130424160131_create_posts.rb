@@ -4,8 +4,10 @@ class CreatePosts < ActiveRecord::Migration
       t.integer :group_id, null: false
       t.text :body
 
-      t.boolean :posted, default: false
+      t.integer :posted_times, default: 0
       t.boolean :from_group, default: true
+      t.boolean :repost
+      t.hstore  :vk_details # repost only
 
       t.timestamps
     end

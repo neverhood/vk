@@ -23,17 +23,17 @@ body#groups {
             }
         }
 
-        div#new-post-form-container, div#edit-post-form-container {
+        div#post-form-container {
             margin: 25px 0 15px 0;
 
             display: none;
         }
 
-        a.attachments-dropdown-toggler {
+        a#attachments-dropdown-toggler {
             @include border-radius(0);
         }
 
-        ul.attachments-dropdown {
+        ul#attachments-dropdown {
             margin: 0;
             padding: 0;
             @include border-radius(0);
@@ -46,10 +46,17 @@ body#groups {
             float: left;
         }
 
-        div#edit-post-media-previews {
-            span.remove {
-                right: none;
-            }
+        div.post span.remove-preview {
+            right: 0;
+        }
+
+        a#cancel-post-edit {
+            float: left;
+            margin-left: 10px;
+        }
+
+        div#post-kinds {
+            margin-bottom: 10px;
         }
     }
 

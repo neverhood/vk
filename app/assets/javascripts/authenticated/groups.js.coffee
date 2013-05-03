@@ -7,6 +7,7 @@ $.api.groups =
     init: ->
         $.api.posts.init()  if $.api.action == 'show'
         $.api.photos.init() if $.api.action == 'show'
+        $.api.schedules.init() if $.api.action == 'show'
 
         $('a#update-groups').bind('ajax:beforeSend', ->
             $(this).addClass 'disabled'

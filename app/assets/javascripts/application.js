@@ -22,6 +22,8 @@
 //= require bootstrap-modal-extended
 //= require bootstrap-modalmanager
 //= require bootstrap-transition
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.ru.js
 //
 //= require cookie
 //
@@ -32,6 +34,7 @@
 //= require authenticated/groups
 //= require authenticated/posts
 //= require authenticated/photos
+//= require authenticated/schedules
 //
 
 $.ajaxSettings.dataType = 'json';
@@ -69,6 +72,7 @@ $(window).on('page:fetch', function() {
 $(window).bind('page:load load', function(event) {
     $.api.controller     = document.body.id;
     $.api.action         = document.body.attributes['data-action'].value;
+    $.api.body = $(document.body)
 
     $.api.header.init();
 

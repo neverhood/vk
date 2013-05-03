@@ -1,12 +1,20 @@
-<div id='new-post-form-container' class='span6'>
-  <%= simple_form_for @post, remote: true, html: { id: 'new-post' } do |form| %>
-    <%= form.input :body, input_html: { class: 'span6', rows: 6 } %>
-    <%= form.input :group_id, as: :hidden %>
-    <%= form.input :from_group, label: false, inline_label: true %>
-    <%= form.input :photo_ids, as: :hidden %>
+<div id='post-form-container' class='span6'>
 
-    <div class='form-actions'>
+  <div id='post-kinds'>
+    <%= link_to t('.regular'), nil, class: 'btn disabled', id: 'post-regular' %>
+    <%= link_to t('.repost'), nil, class: 'btn', id: 'post-repost' %>
+  </div>
+
+  <div id='post-regular'>
+    <%= simple_form_for @post, remote: true, html: { id: 'post-form' } do |form| %>
+      <%= form.input :body, input_html: { class: 'span6', rows: 6 } %>
+      <%= form.input :group_id, as: :hidden %>
+      <%= form.input :repost, as: :hidden, input_html: { value: false } %>
+      <%= form.input :from_group, label: false, inline_label: true %>
+      <%= form.input :photo_ids, as: :hidden %>
+
       <%= form.button :submit, t('common.submit'), class: 'btn-success pull-left', data: { disable_with: t('common.please_wait') } %>
+      <%= link_to t('common.cancel'), nil, id: 'cancel-post-edit', class: 'hidden btn btn-danger' %>
 
       <div class='btn-group pull-right attachments-dropdown-container' id='attachments-dropdown-container'>
         <%= link_to nil, class: 'btn btn-info dropdown-toggle attachments-dropdown-toggler', id: 'attachments-dropdown-toggler' do %>
@@ -20,11 +28,20 @@
 
       <hr class='clear-separator invisible'>
 
-      <div class='post-media-previews' id='post-media-previews'>
+      <div id='post-media-previews'>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 
-  <hr>
+  <div id='post-repost' class='hidden'>
+    <%= simple_form_for @post, remote: true, html: { id: 'repost-form' } do |form| %>
+      <%= form.input :repost, as: :hidden, input_html: { value: true } %>
+      <%= form.input :group_id, as: :hidden, input_html: { value: @group.id } %>
+      <%= form.input :vk_details, as: :string, placeholder: t('.repost_placeholder'), input_html: { class: 'span6' } %>
+
+      <%= form.button :submit, t('common.submit'), class: 'btn-success', data: { disable_with: t('common.please_wait') } %>
+    <% end %>
+  </div>
+
 </div>
 
