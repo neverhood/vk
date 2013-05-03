@@ -11,6 +11,12 @@ class CreateGroups < ActiveRecord::Migration
       t.string :group_type
       t.hstore :photo_urls
 
+      t.integer :subscribers_count
+      t.integer :views_count
+      t.integer :visitors_count
+      t.integer :reach
+      t.integer :reach_subscribers
+
       t.timestamps
     end
 

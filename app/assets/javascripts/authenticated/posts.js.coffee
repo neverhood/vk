@@ -4,6 +4,9 @@
 
 $.api.posts =
     init: ->
+        $.api.photos.init() if $.api.action == 'index'
+        $.api.schedules.init() if $.api.action == 'index'
+
         container = $('div#posts')
         entrySelector = 'div.post'
 
@@ -46,12 +49,18 @@ $.api.posts =
         toggleForm = (event) ->
             event.preventDefault()
             $(this).find('i').toggleClass('icon-angle-up icon-angle-down')
-            $('div#initial-post-form-container').append formContainer
+
+            container.find('div#post-kinds').show()
             form.find('a#cancel-post-edit').addClass 'hidden'
+            form.attr('method', 'post').attr('action', createUrl)
             resetForm()
 
-            form.attr('method', 'post').attr('action', createUrl)
-            formContainer.slideToggle 'fast'
+            if $('div#initial-post-form-container').find('form').length == 0
+                formContainer.hide().
+                    appendTo('div#initial-post-form-container').
+                    slideDown 'fast'
+            else
+                formContainer.slideToggle 'fast'
 
         removeEntry = (event) ->
             event.preventDefault()
@@ -131,6 +140,8 @@ $.api.posts =
         container.on 'click', 'a.post-option.edit', (event) ->
             event.preventDefault()
             post = $(this).parents('div.post')
+
+            $('div#post-kinds').hide()
 
             resetForm()
             post.find('div.content').hide()

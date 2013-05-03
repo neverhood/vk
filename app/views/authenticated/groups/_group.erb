@@ -4,11 +4,11 @@
   </div>
 
   <div class='span3'>
-    <strong><%= group.name %></strong>
+    <%= link_to group.name, group_path(group), class: 'show-group special-link' %>
   </div>
 
   <div class='span5'>
     <%= link_to icon_label('icon-trash', t('.destroy')), group_path(group), method: 'delete', remote: true, class: 'btn btn-info destroy-group' %>
-    <%= link_to icon_label('icon-file', t('.posts')), group_path(group), class: 'btn btn-info destroy-group' %>
+    <%= link_to icon_label('icon-file', t('.posts')), group_posts_path(group), class: 'btn btn-info destroy-group' %>
   </div>
 </div>

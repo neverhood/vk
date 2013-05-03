@@ -40,7 +40,7 @@ class Authenticated::PhotosController < Authenticated::BaseController
   end
 
   def photo_params
-    params.require(:photo)[:image].first
+    params.require(:photo)[:image]
   end
 
   def with_temporary_file path, content

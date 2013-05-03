@@ -9,15 +9,17 @@ Vk::Application.routes.draw do
     resources :groups, only: [ :index, :show, :destroy ] do
       put :update, on: :collection
     end
+
     resources :posts, only: [ :update, :create, :destroy ]
+    get '/posts/:id' => 'posts#index', as: 'group_posts'
+
     resources :photos, only: [ :index, :create ]
-    resources :schedules, only: [ :create, :destroy, :update ] do
-      get :index, on: :member
-    end
+
+    resources :schedules, only: [ :create, :destroy, :update ]
+    get '/schedules/:id' => 'schedules#index', as: 'group_schedules'
 
     get 'profile' => 'users#show', as: 'user'
   end
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

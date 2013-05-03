@@ -5,9 +5,8 @@
 
 $.api.groups =
     init: ->
-        $.api.posts.init()  if $.api.action == 'show'
-        $.api.photos.init() if $.api.action == 'show'
-        $.api.schedules.init() if $.api.action == 'show'
+        container = $.api.body.find('div#groups')
+        modal = $.api.body.find('div#group-modal')
 
         $('a#update-groups').bind('ajax:beforeSend', ->
             $(this).addClass 'disabled'
@@ -18,7 +17,20 @@ $.api.groups =
             $('div#groups').html response.groups
         )
 
-        $('div#groups').on 'ajax:beforeSend', 'a.destroy-group', ->
+        container.on 'ajax:beforeSend', 'a.destroy-group', ->
             $(this).parents('div.group').remove()
 
+        container.on 'click', 'a.show-group', (event) ->
+            event.preventDefault()
+
+            $.api.body.modalmanager('loading')
+            $.getJSON this.href, (data) ->
+                $.api.body.find('div#group').html data.group
+
+                modal.modal 'show'
+
+        $.api.body.find('a#close-group-modal, button#close-group-modal').bind 'click', (event) ->
+            event.preventDefault()
+
+            modal.modal 'hide'
 

@@ -10,4 +10,13 @@ body#groups {
         margin-top: 10px;
         margin-bottom: 10px;
     }
+
+    div#group div#public-statistics {
+        span {
+            display: inline-block;
+            font-weight: bold;
+
+            width: 200px;
+        }
+    }
 }

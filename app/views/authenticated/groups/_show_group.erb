@@ -1,0 +1,20 @@
+<%= link_to t('.vk_group'), vk_group_url(@group), class: 'special-link', target: '_new' %>
+
+<div class='page-header'>
+  <h3>
+    <%= t '.public_statistics' %>
+   </h3>
+   <small> <%= t '.public_statistics_explanation' %> </small>
+</div>
+
+<strong class='info'> <%= t '.updated_at' %> <%= l @group.updated_at, format: :short %> </strong>
+
+<hr />
+
+<div id='public-statistics'>
+  <div><span> <%= t '.info.subscribers' %> </span>: <strong class='label label-info'> <%= @group.subscribers_count %> </strong></div>
+  <div><span> <%= t '.info.views' %> </span>: <strong class='label label-info'> <%= @group.views_count %> </strong></div>
+  <div><span> <%= t '.info.visitors' %> </span>: <strong class='label label-info'> <%= @group.visitors_count %> </strong></div>
+  <div><span> <%= t '.info.reach' %> </span>: <strong class='label label-info'> <%= @group.reach %> </strong></div>
+  <div><span> <%= t '.info.reach_subscribers' %> </span>: <strong class='label label-info'> <%= @group.reach_subscribers %> </strong></div>
+</div>

@@ -55,6 +55,11 @@ CREATE TABLE groups (
     screen_name character varying(255),
     group_type character varying(255),
     photo_urls hstore,
+    subscribers_count integer,
+    views_count integer,
+    visitors_count integer,
+    reach integer,
+    reach_subscribers integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );

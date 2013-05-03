@@ -10,4 +10,8 @@ module ApplicationHelper
   def dom_id(*args)
     super.dasherize
   end
+
+  def vk_group_url group
+    'http://vk.com/' + group.screen_name
+  end
 end

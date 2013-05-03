@@ -63,13 +63,19 @@ ru:
         header: 'Группы'
         no_groups: 'Не найдено ни одной группы. Пожалуйста, обновите список групп'
         update: 'Обновить список групп'
-      show:
-        new_post: 'Новый пост (Показать\скрыть форму)'
-        photos_body: 'Загрузи бля'
-        upload_photos: 'Загрузить фотографии'
-        attachments_toggler: 'Прикрепить'
-        uploads:
-          photos: 'Фотография'
+        info: 'Информация о группе'
+      show_group:
+        vk_group: 'Перейти на страницу "ВКонтакте"'
+        updated_at: 'Статистика от'
+        public_statistics: 'Публичная статистика'
+        public_statistics_explanation: 'Данная статистика будет видна только в том случае, если Вы будете пользоваться функцией "Авто-Обменов"'
+        info:
+          subscribers: 'Подписчики'
+          views: 'Просмотры'
+          visitors: 'Уникильные посетители'
+          reach: 'Полный охват'
+          reach_subscribers: 'Охват подписчиков'
+          recent_posts_count: 'Постов за последние сутки'
       group:
         destroy: 'Убрать из списка'
         posts: 'Посты'
@@ -92,6 +98,8 @@ ru:
         unfinished: 'Не завершено'
 
     posts:
+      index:
+        new_post: 'Новый пост (Показать\скрыть форму)'
       form:
         attachments_toggler: 'Прикрепить'
         regular: 'Пост'

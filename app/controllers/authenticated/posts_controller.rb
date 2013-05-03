@@ -1,7 +1,13 @@
 class Authenticated::PostsController < Authenticated::BaseController
   before_filter :find_post!, only: [ :update, :destroy ]
-  before_filter :find_group!, only: [ :create ]
+  before_filter :find_group!, only: [ :index, :create ]
   before_filter :validate_photo_ids!, only: [ :create, :update ], unless: -> { repost? }
+
+  def index
+    @posts  = @group.posts.page(params[:page])
+    @photos = current_user.photos.all
+    @post   = @group.posts.new
+  end
 
   def destroy
     @post.destroy
@@ -53,7 +59,11 @@ class Authenticated::PostsController < Authenticated::BaseController
   end
 
   def find_group!
-    @group = current_user.groups.find(post_params[:group_id])
+    @group = if action_name == 'index'
+               current_user.groups.find(params[:id])
+             else
+               current_user.groups.find(post_params[:group_id])
+             end
   end
 
   def post_params

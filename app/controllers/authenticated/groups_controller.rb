@@ -6,9 +6,10 @@ class Authenticated::GroupsController < Authenticated::BaseController
   end
 
   def show
-    @posts  = @group.posts.page(params[:page])
-    @photos = current_user.photos.all
-    @post   = @group.posts.new
+    respond_to do |format|
+      format.html
+      format.json { render json: { group: render_to_string(partial: 'show_group') }, status: 200 }
+    end
   end
 
   def destroy
@@ -31,6 +32,10 @@ class Authenticated::GroupsController < Authenticated::BaseController
       else
         current_user.groups.create(group_attributes)
       end
+    end
+
+    current_user.groups.each do |group|
+      Thread.new { group.refresh_info! }
     end
 
     respond_to do |format|

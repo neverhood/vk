@@ -50,6 +50,5 @@ $.api.photos =
         $('a#attachment-photo').bind 'click', (event) ->
             event.preventDefault()
 
-            $('div#photos div.photo').show()
             modal.modal 'show'
 
