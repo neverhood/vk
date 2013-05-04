@@ -2,6 +2,8 @@
   <%= page_header @group.name %>
 <% end %>
 
+<input id='aaa' name='afasf' type='datetime-local' min='<%= Time.now.strftime('%Y-%m-%d %H:%M') %>'>
+
 <div id='posts-index'>
   <%= link_to nil, id: 'post-form-toggler', class: 'btn btn-info' do %>
     <i class='icon-angle-up'></i> <%= t '.new_post' %>

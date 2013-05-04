@@ -9,7 +9,7 @@
       </div>
     <% else %>
       <div class='content'>
-        <div class='body'><%= simple_format post.body %></div>
+        <div class='body'><%= simple_format(post.body) %></div>
 
         <div class='post-options'>
           <%= link_to icon_label('icon-pencil'), nil, class: 'edit post-option' %>

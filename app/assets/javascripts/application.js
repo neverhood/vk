@@ -35,6 +35,7 @@
 //= require authenticated/posts
 //= require authenticated/photos
 //= require authenticated/schedules
+//= require authenticated/auto_exchanges_searches
 //
 
 $.ajaxSettings.dataType = 'json';

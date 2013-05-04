@@ -14,6 +14,17 @@ ru:
       schedule:
         post_at_date: 'Дата публикации'
         post_at_time: 'Время публикации'
+      auto_exchanges_search:
+        min_subscribers_count: 'Подписчиков от'
+        max_subscribers_count: 'Подписчиков до'
+        min_views_count: 'Просмотров от'
+        max_views_count: 'Просмотров до'
+        min_visitors_count: 'Посетителей от'
+        max_visitors_count: 'Посетителей до'
+        min_reach: 'Охват от'
+        max_reach: 'Охват до'
+        min_subscribers_reach: 'Охват подписчиков от'
+        max_subscribers_reach: 'Охват подписчиков до'
     # Labels and hints examples
     # labels:
     #   defaults:

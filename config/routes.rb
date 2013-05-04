@@ -10,6 +10,7 @@ Vk::Application.routes.draw do
       put :update, on: :collection
 
       resources :auto_exchanges, only: [ :index, :create, :update ]
+      resource  :auto_exchanges_search, only: [ :new, :create ]
     end
 
     resources :posts, only: [ :update, :create, :destroy ]

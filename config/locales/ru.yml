@@ -69,7 +69,7 @@ ru:
         updated_at: 'Статистика от'
         public_statistics: 'Публичная статистика'
         public_statistics_explanation: 'Данная статистика будет видна только в том случае, если Вы будете пользоваться функцией "Авто-Обменов"'
-        info:
+        info: &group_info_attributes
           subscribers: 'Подписчики'
           views: 'Просмотры'
           visitors: 'Уникильные посетители'
@@ -113,8 +113,13 @@ ru:
       post:
         repost_from: 'Репост из'
 
-    auto_exchanges:
-      index:
+    auto_exchanges_searches:
+      new:
         header: 'Авто Обмены - %{name}'
         no_posts: 'У вас нет ни одного поста, отмеченного как "доступный для обменов". Пожалуйста, перейдите на страницу постов группы, и отметьте нужны посты'
         group_posts: 'Посты группы "%{name}"'
+        submit: 'Поиск'
+        new: 'Скрыть\показать форму поиска'
+      auto_exchanges_search:
+        info:
+          <<: *group_info_attributes

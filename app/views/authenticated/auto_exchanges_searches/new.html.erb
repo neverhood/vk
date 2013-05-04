@@ -1,0 +1,51 @@
+<% content_for :page_header do %>
+  <%= page_header(t '.header', name: @group.name) %>
+<% end %>
+
+<%- if @posts.none? %>
+  <div class='alert alert-danger'>
+    <i class='icon-exclamation-sign'></i> <%= t '.no_posts' %>
+
+    <hr />
+
+    <%= link_to t('.group_posts', name: @group.name), group_posts_path(@group) %>
+  </div>
+<% end %>
+
+<%= link_to icon_label('icon-ange-up', t('.new')), nil, class: 'btn btn-info', id: 'new-search-form-toggler' %>
+
+<div id='new-search-form-container'>
+  <%= simple_form_for :auto_exchanges_search, url: group_auto_exchanges_search_path(@group), remote: true, html: { id: 'new-search', class: 'form-horizontal' } do |form| %>
+    <div class='controls-row'>
+      <%= form.input :min_subscribers_count, as: :integer, wrapper_class: 'span5', input_html: { value: stored_condition(:min_subscribers_count) } %>
+      <%= form.input :max_subscribers_count, as: :integer, wrapper_class: 'span5', input_html: { value: stored_condition(:max_subscribers_count) } %>
+    </div>
+
+    <div class='controls-row'>
+      <%= form.input :min_views_count, as: :integer, wrapper_class: 'span5', input_html: { value: stored_condition(:min_views_count) } %>
+      <%= form.input :max_views_count, as: :integer, wrapper_class: 'span5', input_html: { value: stored_condition(:max_views_count) } %>
+    </div>
+
+    <div class='controls-row'>
+      <%= form.input :min_visitors_count, as: :integer, wrapper_class: 'span5', input_html: { value: stored_condition(:min_visitors_count) } %>
+      <%= form.input :max_visitors_count, as: :integer, wrapper_class: 'span5', input_html: { value: stored_condition(:max_visitors_count) } %>
+    </div>
+
+    <div class='controls-row'>
+      <%= form.input :min_reach, as: :integer, wrapper_class: 'span5', input_html: { value: stored_condition(:min_reach) } %>
+      <%= form.input :max_reach, as: :integer, wrapper_class: 'span5', input_html: { value: stored_condition(:max_reach) } %>
+    </div>
+
+    <div class='controls-row'>
+      <%= form.input :min_subscribers_reach, as: :integer, wrapper_class: 'span5', input_html: { value: stored_condition(:min_subscribers_reach) } %>
+      <%= form.input :max_subscribers_reach, as: :integer, wrapper_class: 'span5', input_html: { value: stored_condition(:max_subscribers_reach) } %>
+    </div>
+
+    <%= form.button :submit, t('.submit'), class: 'btn-success', data: { disable_with: t('common.please_wait') } %>
+  <% end %>
+</div>
+
+<hr>
+
+<div id='search-results'>
+</div>

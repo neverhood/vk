@@ -6,10 +6,10 @@ class CreateSchedules < ActiveRecord::Migration
       t.datetime :post_at
       t.datetime :delete_at
 
-      t.boolean :posted
-      t.boolean :deleted
-
-      t.timestamps
+      t.boolean :posted, default: false
+      t.boolean :deleted, default: false
     end
+
+    add_index :schedules, :post_id
   end
 end

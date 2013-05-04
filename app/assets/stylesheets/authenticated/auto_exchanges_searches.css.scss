@@ -1,0 +1,36 @@
+// Place all the styles related to the authenticated/auto_exchanges_searches controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body#auto-exchanges-searches {
+    div#new-search-form-container {
+        margin-top: 20px;
+    }
+
+    form#new-search {
+        div.controls-row {
+            margin-bottom: 10px;
+        }
+    }
+
+    div.post {
+        min-height: 50px;
+        padding: 10px;
+
+        width: 540px;
+        float: left;
+    }
+
+    div.post-photo {
+        float: left;
+        margin: 0 5px;
+    }
+
+    div.group-info span {
+        display: inline-block;
+        font-weight: bold;
+
+        width: 200px;
+    }
+
+}

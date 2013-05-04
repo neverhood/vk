@@ -14,4 +14,7 @@ module ApplicationHelper
   def vk_group_url group
     'http://vk.com/' + group.screen_name
   end
+
+  def highlight_links text
+  end
 end

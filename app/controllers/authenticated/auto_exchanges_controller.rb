@@ -2,7 +2,6 @@ class Authenticated::AutoExchangesController < Authenticated::BaseController
   before_filter :find_group!
 
   def index
-    @posts = current_user.posts.available_for_exchanges
   end
 
   def create
