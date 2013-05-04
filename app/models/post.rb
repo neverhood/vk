@@ -9,6 +9,7 @@ class Post < ActiveRecord::Base
   before_destroy -> { photos.clear }
 
   default_scope -> { order('posts.created_at DESC') }
+  scope :available_for_exchanges, -> { where(available_for_exchanges: true) }
 
   def publish!
     vk = VkontakteApi::Client.new(user.token)

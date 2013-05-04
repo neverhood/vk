@@ -13,8 +13,15 @@
     <%= render 'authenticated/posts/form' %>
   </div>
 
-  <div id='posts' class='row'>
-    <%= render @posts %>
+  <div id='posts-container'>
+    <div class='container' id='posts-header'>
+      <div class='span6'> <%= t '.post' %> </div>
+      <div class='span2'> <%= t '.available_for_exchanges?' %> </div>
+    </div>
+
+    <div id='posts' class='container'>
+      <%= render @posts %>
+    </div>
   </div>
 
   <%= render 'authenticated/photos/form_modal' %>

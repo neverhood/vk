@@ -60,6 +60,7 @@ CREATE TABLE groups (
     visitors_count integer,
     reach integer,
     reach_subscribers integer,
+    auto_exchange_conditions hstore,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -159,6 +160,7 @@ CREATE TABLE posts (
     from_group boolean DEFAULT true,
     repost boolean,
     vk_details hstore,
+    available_for_exchanges boolean DEFAULT false,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -382,6 +384,13 @@ CREATE UNIQUE INDEX index_photos_posts_on_photo_id_and_post_id ON photos_posts U
 --
 
 CREATE INDEX index_photos_posts_on_post_id ON photos_posts USING btree (post_id);
+
+
+--
+-- Name: index_posts_on_available_for_exchanges; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_posts_on_available_for_exchanges ON posts USING btree (available_for_exchanges);
 
 
 --

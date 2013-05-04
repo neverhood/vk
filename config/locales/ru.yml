@@ -79,6 +79,7 @@ ru:
       group:
         destroy: 'Убрать из списка'
         posts: 'Посты'
+        exchanges: 'Авто Обмены'
 
     photos:
       form_modal:
@@ -100,6 +101,8 @@ ru:
     posts:
       index:
         new_post: 'Новый пост (Показать\скрыть форму)'
+        available_for_exchanges?: 'Доступен для обменов?'
+        post: 'Пост'
       form:
         attachments_toggler: 'Прикрепить'
         regular: 'Пост'
@@ -109,3 +112,9 @@ ru:
           photos: 'Фотография'
       post:
         repost_from: 'Репост из'
+
+    auto_exchanges:
+      index:
+        header: 'Авто Обмены(%{name})'
+        no_posts: 'У вас нет ни одного поста, отмеченного как "доступный для обменов". Пожалуйста, перейдите на страницу постов группы, и отметьте нужны посты'
+        group_posts: 'Посты группы "%{name}"'

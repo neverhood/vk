@@ -6,6 +6,23 @@ body#posts {
 
     /* Show */
     div#posts-index {
+        div#posts-header {
+            margin-bottom: 10px;
+            clear: both;
+        }
+
+        div.available-for-exchanges-column {
+            text-align: center;
+
+            a {
+                text-decoration: none;
+                color: $infoText;
+            }
+            i {
+                font-size: 20px;
+            }
+        }
+
         div#posts {
             margin: 15px 0;
         }

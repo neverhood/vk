@@ -17,6 +17,8 @@ class CreateGroups < ActiveRecord::Migration
       t.integer :reach
       t.integer :reach_subscribers
 
+      t.hstore :auto_exchange_conditions
+
       t.timestamps
     end
 

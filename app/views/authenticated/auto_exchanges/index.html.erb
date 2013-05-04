@@ -1,0 +1,14 @@
+<% content_for :page_header do %>
+  <%= page_header(t '.header', name: @group.name) %>
+<% end %>
+
+<%- if @posts.none? %>
+  <div class='alert alert-danger'>
+    <i class='icon-exclamation-sign'></i> <%= t '.no_posts' %>
+
+    <hr />
+
+    <%= link_to t('.group_posts', name: @group.name), group_posts_path(@group) %>
+  </div>
+<% end %>
+

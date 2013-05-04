@@ -34,6 +34,6 @@ class Group < ActiveRecord::Base
   end
 
   def vk_stats
-    @_vk_stats ||= vk.stats.get(gid: vk_id, date_from: Time.now.strftime('%Y-%m-%d')).first
+    @_vk_stats ||= vk.stats.get(gid: vk_id, date_from: Date.yesterday.strftime('%Y-%m-%d')).last
   end
 end

@@ -1,0 +1,2 @@
+module Authenticated::AutoExchangesHelper
+end

@@ -10,5 +10,6 @@
   <div class='span5'>
     <%= link_to icon_label('icon-trash', t('.destroy')), group_path(group), method: 'delete', remote: true, class: 'btn btn-info destroy-group' %>
     <%= link_to icon_label('icon-file', t('.posts')), group_posts_path(group), class: 'btn btn-info destroy-group' %>
+    <%= link_to icon_label('icon-exchange', t('.exchanges')), group_auto_exchanges_path(group), class: 'btn btn-info' %>
   </div>
 </div>

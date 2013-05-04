@@ -162,3 +162,11 @@ $.api.posts =
 
                     $('input#post_photo_ids').val postPhotoIds.join(',')
 
+        container.on 'ajax:beforeSend', 'div.available-for-exchanges-column a', (event) ->
+            $(this).find('i').toggleClass('icon-star icon-star-empty')
+
+            if /true/.test this.href
+                this.href = this.href.replace('true', 'false')
+            else
+                this.href = this.href.replace('false', 'true')
+

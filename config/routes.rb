@@ -8,6 +8,8 @@ Vk::Application.routes.draw do
   scope module: 'authenticated' do
     resources :groups, only: [ :index, :show, :destroy ] do
       put :update, on: :collection
+
+      resources :auto_exchanges, only: [ :index, :create, :update ]
     end
 
     resources :posts, only: [ :update, :create, :destroy ]
@@ -17,6 +19,7 @@ Vk::Application.routes.draw do
 
     resources :schedules, only: [ :create, :destroy, :update ]
     get '/schedules/:id' => 'schedules#index', as: 'group_schedules'
+
 
     get 'profile' => 'users#show', as: 'user'
   end

@@ -67,7 +67,11 @@ class Authenticated::PostsController < Authenticated::BaseController
   end
 
   def post_params
-    params.require(:post).permit(:body, :group_id, :from_group, photo_ids: [])
+    if params[:post].present?
+      params.require(:post).permit(:body, :group_id, :from_group, photo_ids: [])
+    else
+      params.permit(:available_for_exchanges)
+    end
   end
 
   def repost_params
@@ -80,7 +84,7 @@ class Authenticated::PostsController < Authenticated::BaseController
   end
 
   def repost?
-    params.require(:post)[:repost] == 'true'
+    params[:post].present? and params[:post][:repost] == 'true'
   end
 
   def valid_repost?
