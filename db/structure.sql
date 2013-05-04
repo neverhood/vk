@@ -193,7 +193,9 @@ CREATE TABLE schedules (
     id integer NOT NULL,
     post_id integer,
     post_at timestamp without time zone,
-    finished boolean,
+    delete_at timestamp without time zone,
+    posted boolean,
+    deleted boolean,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );

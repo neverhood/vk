@@ -8,7 +8,7 @@
     <%= link_to icon_label('icon-angle-up', t('.new')), nil, id: 'new-schedule-form-toggler', class: 'btn btn-info' %>
 
     <div id='schedule-form-container'>
-      <div id='schedule-options'>
+      <div id='schedule-options' class='well'>
         <%= link_to t('.regular'), nil, id: 'regular-schedule', class: 'btn disabled' %>
         <%= link_to t('.now'), nil, id: 'now-schedule', class: 'btn' %>
       </div>
