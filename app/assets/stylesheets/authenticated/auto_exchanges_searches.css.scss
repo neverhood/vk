@@ -3,6 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body#auto-exchanges-searches {
+    div#no-results {
+        display: none;
+    }
+
     div#new-search-form-container {
         margin-top: 20px;
     }
@@ -31,6 +35,13 @@ body#auto-exchanges-searches {
         font-weight: bold;
 
         width: 200px;
+    }
+
+    div#search-results-sortings-container {
+        display: none;
+
+        text-align: center;
+        margin-bottom: 15px;
     }
 
 }

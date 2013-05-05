@@ -120,6 +120,14 @@ ru:
         group_posts: 'Посты группы "%{name}"'
         submit: 'Поиск'
         new: 'Скрыть\показать форму поиска'
+        sortings:
+          subscribers_count: 'Подписчики'
+          views_count: 'Просмотры'
+          visitors_count: 'Уникильные посетители'
+          reach: 'Полный охват'
+          reach_subscribers: 'Охват подписчиков'
+          recent_posts_count: 'Постов за последние сутки'
+
       auto_exchanges_search:
         info:
           <<: *group_info_attributes

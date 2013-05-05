@@ -7,7 +7,7 @@ class Authenticated::AutoExchangesSearchesController < Authenticated::BaseContro
 
   def create
     @group.update auto_exchange_conditions: auto_exchanges_search_params
-    @auto_exchanges_search = AutoExchangesSearch.create(auto_exchanges_search_params)
+    @auto_exchanges_search = AutoExchangesSearch.create(auto_exchanges_search_params, order)
 
     render json: { results: render_to_string(partial: 'auto_exchanges_search', collection: @auto_exchanges_search.posts, as: 'post') }
   end
@@ -24,5 +24,19 @@ class Authenticated::AutoExchangesSearchesController < Authenticated::BaseContro
                                                   :min_subscribers_reach, :max_subscribers_reach).
 
                                                   delete_if { |key, value| value.to_i < 1 }
+  end
+
+  def auto_exchanges_search_sort_params
+    params.require(:auto_exchanges_search).permit(:sort_attribute, :sort_direction).tap do |attrs|
+      attrs[:sort_attribute] = nil unless AutoExchangesSearch.sortable_attributes.include?(attrs[:sort_attribute])
+      attrs[:sort_direction] = nil unless AutoExchangesSearch.sortable_directions.include?(attrs[:sort_direction])
+    end
+  end
+
+  def order
+    attrs = auto_exchanges_search_sort_params
+    return nil unless attrs[:sort_attribute].present? and attrs[:sort_direction].present?
+
+    "groups.#{ attrs[:sort_attribute] } #{ attrs[:sort_direction] }"
   end
 end

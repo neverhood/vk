@@ -9,3 +9,7 @@ hr.clear-separator {
 .special-link {
     color: $infoText;
 }
+
+.loading {
+    @include opacity(20)
+}

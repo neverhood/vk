@@ -1,17 +1,28 @@
 class AutoExchangesSearch
   include Enumerable
 
+  DEFAULT_SORT = 'posts.created_at DESC'
+
   class << self
-    def create params
-      new(params).tap { |search| search.send(:fetch_results!) }
+    def create params, order = DEFAULT_SORT
+      new(params, order).tap { |search| search.send(:fetch_results!) }
+    end
+
+    def sortable_attributes
+      %w(subscribers_count views_count visitors_count reach reach_subscribers)
+    end
+
+    def sortable_directions
+      %w(asc desc)
     end
   end
 
-  attr_accessor :posts
+  attr_accessor :posts, :order
 
-  def initialize attrs
+  def initialize attrs, order = DEFAULT_SORT
     @groups = Group.arel_table
     @posts = []
+    @order = order
 
     attrs.each do |key, value|
       instance_variable_set :"@#{key}", value
@@ -36,7 +47,10 @@ class AutoExchangesSearch
       results.where!(conditions_for(:reach_subscribers)) if processible_attributes?(:reach_subscribers)
     end
 
-    @posts = Post.where(available_for_exchanges: true, group_id: groups.pluck(:id)).includes(:group)
+    @posts = Post.unscoped.where(available_for_exchanges: true, group_id: groups.pluck(:id)).
+      joins(:group).
+      order(order).
+      includes(:group)
   end
 
   def processible_attributes? attr

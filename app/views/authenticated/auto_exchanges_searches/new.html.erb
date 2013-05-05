@@ -41,11 +41,24 @@
       <%= form.input :max_subscribers_reach, as: :integer, wrapper_class: 'span5', input_html: { value: stored_condition(:max_subscribers_reach) } %>
     </div>
 
+    <%= form.input :sort_attribute, as: 'hidden' %>
+    <%= form.input :sort_direction, as: 'hidden' %>
+
     <%= form.button :submit, t('.submit'), class: 'btn-success', data: { disable_with: t('common.please_wait') } %>
   <% end %>
 </div>
 
 <hr>
+
+<div id='search-results-sortings-container'>
+  <% AutoExchangesSearch.sortable_attributes.each do |sort_option| %>
+    <%= sort_button(sort_option) %>
+  <% end %>
+</div>
+
+<div id='no-results'>
+  <h3><%= t '.no_results' %></h3>
+</div>
 
 <div id='search-results'>
 </div>
