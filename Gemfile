@@ -42,6 +42,8 @@ group :test do
   gem 'database_cleaner', git: 'git://github.com/bmabey/database_cleaner.git'
 end
 
+gem 'sidekiq'
+
 gem 'russian'
 gem 'unicode_utils'
 

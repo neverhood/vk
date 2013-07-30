@@ -11,12 +11,6 @@ class Authenticated::SchedulesController < Authenticated::BaseController
   def create
     @schedule = @post.schedules.create(schedule_params)
 
-    if @schedule.post_at > Time.now
-      @schedule.publish_later!
-    else
-      @schedule.publish_now!
-    end
-
     respond_to do |format|
       if @schedule.persisted?
         format.html { redirect_to group_path(@post.group), notice: I18n.t('flash.authenticated.schedules.create.notice') }

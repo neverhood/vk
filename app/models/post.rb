@@ -20,7 +20,7 @@ class Post < ActiveRecord::Base
   protected
 
   def repost!(vk)
-    vk.wall.repost(gid: group.vk_id, object: _vk_object)
+    vk.wall.repost(gid: group.vk_id, object: _vk_object, message: body)
   end
 
   def post!(vk)

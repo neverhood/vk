@@ -75,7 +75,7 @@ class Authenticated::PostsController < Authenticated::BaseController
   end
 
   def repost_params
-    params.require(:post).permit(:vk_details).tap do |attributes|
+    params.require(:post).permit(:vk_details, :body).tap do |attributes|
       wall_id, post_id = attributes[:vk_details].scan(/\d+_\d+/).last.split('_')
 
       attributes[:vk_details] = { url: attributes[:vk_details], wall_id: wall_id, post_id: post_id }

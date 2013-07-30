@@ -4,11 +4,12 @@ class Schedule < ActiveRecord::Base
 
   validates :post_at, presence: true
 
-  def publish_later!
-    true
-  end
+  after_commit -> { ScheduleWorker.perform_at(post_at, id); logger.debug('====') }, on: :create
 
   def publish_now!
-    true
+    if post.publish!
+      update_column(:posted, true)
+    end
   end
+
 end

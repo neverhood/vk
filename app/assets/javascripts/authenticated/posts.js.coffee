@@ -21,6 +21,7 @@ $.api.posts =
             container.find('div.content').show()
             attachments.mediaPreviewsContainer.find('div.post-media-preview').remove()
             attachments.photosContainer.find('div.photo').show()
+            $('a#post-regular').trigger('click')
         updateUrl = (id) -> "/posts/#{id}"
         createUrl = '/posts/'
 

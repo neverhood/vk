@@ -25,6 +25,8 @@ ru:
         max_reach: 'Охват до'
         min_subscribers_reach: 'Охват подписчиков от'
         max_subscribers_reach: 'Охват подписчиков до'
+      post:
+        comment: 'Комментарий'
     # Labels and hints examples
     # labels:
     #   defaults:

@@ -53,6 +53,7 @@ ru:
     users:
       show:
         header: 'Профиль'
+        groups: 'Группы'
         wall_post_disabled: 'Нет возможности постинга'
         wall_post_enabled: 'Есть возможность постинга'
         wall_post_disabled_explanation: 'Чтобы включить возможность постинга, Вам нужно нажать на кнопку ниже,
@@ -108,6 +109,7 @@ ru:
         regular: 'Пост'
         repost: 'Репост'
         repost_placeholder: 'http://vk.com/id8822049?w=wall-52504667_65'
+        comment: 'Комментарий'
         uploads:
           photos: 'Фотография'
       post:
