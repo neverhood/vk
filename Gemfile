@@ -20,9 +20,9 @@ group :assets do
   gem 'uglifier', '>= 1.3.0'
 
   gem 'bootstrap-sass'
-  gem 'font-awesome-more-rails', git: 'git@github.com:neverhood/font-awesome-more-rails.git'
   gem 'jquery-fileupload-rails'
   gem 'bootstrap-datepicker-rails'
+  gem "font-awesome-rails"
 end
 
 group :development, :test do
