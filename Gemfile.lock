@@ -82,8 +82,9 @@ GEM
       faraday_middleware (~> 0.8)
       oj (~> 2.0)
     ffi (1.9.0)
-    font-awesome-rails (3.2.1.2)
-      railties (>= 3.2, < 5.0)
+    font-awesome-sass-rails (3.0.2.2)
+      railties (>= 3.1.1)
+      sass-rails (>= 3.1.1)
     formatador (0.2.4)
     guard (1.7.0)
       formatador (>= 0.2.4)
@@ -254,7 +255,7 @@ DEPENDENCIES
   coffee-rails
   database_cleaner!
   factory_girl_rails
-  font-awesome-rails
+  font-awesome-sass-rails
   guard-rspec
   jquery-fileupload-rails
   jquery-rails

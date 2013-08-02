@@ -22,7 +22,7 @@ group :assets do
   gem 'bootstrap-sass'
   gem 'jquery-fileupload-rails'
   gem 'bootstrap-datepicker-rails'
-  gem "font-awesome-rails"
+  gem 'font-awesome-sass-rails'
 end
 
 group :development, :test do
